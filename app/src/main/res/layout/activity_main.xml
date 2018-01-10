@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.nadya.mycalc.MainActivity">
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >>
+
+        <TextView
+            android:id="@+id/infoTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@id/infoTextView"
+            android:layout_weight="0"
+            android:lines="2"
+            android:maxLines="5"
+            android:textSize="50sp" />
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/buttonClear"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:layout_weight="1"
+                android:text="C"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+            <Button
+                android:id="@+id/buttonBack"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="←"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/buttonClear"
+                app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+            <Button
+                android:id="@+id/buttonPers"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:layout_weight="1"
+                android:text="%"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/buttonBack"
+                app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+            <Button
+                android:id="@+id/buttonDivide"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:layout_weight="1"
+                android:text="/"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/buttonDivide"
+                app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/buttonSeven"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="7"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/buttonClear" />
+
+            <Button
+                android:id="@+id/buttonEight"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="8"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/buttonSeven"
+                app:layout_constraintTop_toBottomOf="@+id/buttonClear" />
+
+            <Button
+                android:id="@+id/buttonNine"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="9"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/buttonEight"
+                app:layout_constraintTop_toBottomOf="@+id/buttonClear" />
+
+            <Button
+                android:id="@+id/buttonMultiply"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="*"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonClear" />
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/buttonFour"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="4"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/buttonSeven" />
+
+            <Button
+                android:id="@+id/buttonFive"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="5"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/buttonFour"
+                app:layout_constraintTop_toBottomOf="@+id/buttonSeven" />
+
+            <Button
+                android:id="@+id/buttonSix"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="6"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/buttonFive"
+                app:layout_constraintTop_toBottomOf="@+id/buttonSeven" />
+
+            <Button
+                android:id="@+id/buttonAdd"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="+"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/buttonSix"
+                app:layout_constraintTop_toBottomOf="@+id/buttonSeven" />
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/buttonOne"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="1"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/buttonFour" />
+
+            <Button
+                android:id="@+id/buttonTwo"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="2"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/buttonOne"
+                app:layout_constraintTop_toBottomOf="@+id/buttonFour" />
+
+            <Button
+                android:id="@+id/buttonThree"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="3"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/buttonTwo"
+                app:layout_constraintTop_toBottomOf="@+id/buttonFour" />
+
+            <Button
+                android:id="@+id/buttonSubstract"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="-"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/buttonTwo"
+                app:layout_constraintTop_toBottomOf="@+id/buttonThree" />
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >>
+
+            <Button
+                android:id="@+id/buttonBraces"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="( )"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/buttonOne" />
+
+            <Button
+                android:id="@+id/buttonZero"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="0"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/buttonBraces"
+                app:layout_constraintTop_toBottomOf="@+id/buttonOne" />
+
+            <Button
+                android:id="@+id/buttonDot"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="."
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/buttonZero"
+                app:layout_constraintTop_toBottomOf="@+id/buttonOne" />
+
+            <Button
+                android:id="@+id/buttonEqual"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="="
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/buttonDot"
+                app:layout_constraintTop_toBottomOf="@+id/buttonSubtract" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
