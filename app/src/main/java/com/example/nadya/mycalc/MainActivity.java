@@ -1,14 +1,26 @@
 package com.example.nadya.mycalc;
 
-import android.content.DialogInterface;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
-import com.example.nadya.mycalc.MathParser;
+
+import java.io.BufferedWriter;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import android.view.Menu;
+import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener {
 
@@ -40,50 +52,35 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             bt_arr[i].setOnClickListener(this);
         }
 
-        /*btOne = (Button) findViewById(R.id.buttonOne);
-        btTwo = (Button) findViewById(R.id.buttonTwo);
-        btThree = (Button) findViewById(R.id.buttonThree);
-        btFour = (Button) findViewById(R.id.buttonFour);
-        btFive = (Button) findViewById(R.id.buttonFive);
-        btSix = (Button) findViewById(R.id.buttonSix);
-        btSeven = (Button) findViewById(R.id.buttonSeven);
-        btEight = (Button) findViewById(R.id.buttonEight);
-        btNine = (Button) findViewById(R.id.buttonNine);
-        btZero = (Button) findViewById(R.id.buttonZero);
-        btPlus = (Button) findViewById(R.id.buttonAdd);
-        btMinus = (Button) findViewById(R.id.buttonSubstract);
-        btMulti = (Button) findViewById(R.id.buttonMultiply);
-        btDiv = (Button) findViewById(R.id.buttonDivide);
-        btEqual = (Button) findViewById(R.id.buttonEqual);
-        btClear = (Button) findViewById(R.id.buttonClear);
-        btDot = (Button) findViewById(R.id.buttonDot);
-        btPer = (Button) findViewById(R.id.buttonPers);
-        btBack = (Button) findViewById(R.id.buttonBack);
-        btBrace = (Button) findViewById(R.id.buttonBraces);*/
+
         tvLCD = (TextView) findViewById(R.id.infoTextView);
         etLCD = (TextView) findViewById(R.id.editText);
 
-        /*btOne.setOnClickListener(this);
-        btTwo.setOnClickListener(this);
-        btThree.setOnClickListener(this);
-        btFour.setOnClickListener(this);
-        btFive.setOnClickListener(this);
-        btSix.setOnClickListener(this);
-        btSeven.setOnClickListener(this);
-        btEight.setOnClickListener(this);
-        btNine.setOnClickListener(this);
-        btZero.setOnClickListener(this);
-        btPlus.setOnClickListener(this);
-        btMinus.setOnClickListener(this);
-        btMulti.setOnClickListener(this);
-        btDiv.setOnClickListener(this);
-        btClear.setOnClickListener(this);
-        btEqual.setOnClickListener(this);
-        btDot.setOnClickListener(this);
-        btPer.setOnClickListener(this);
-        btBack.setOnClickListener(this);
-        btBrace.setOnClickListener(this);*/
         tvLCD.setOnClickListener(this);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        Intent intent;
+        switch(id){
+            case R.id.itemAdv:
+                intent = new Intent(MainActivity.this, AdvancedActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.itemHist:
+                intent = new Intent(MainActivity.this, HistoryActivity.class);
+                startActivity(intent);
+                return true;
+            //дописати решту
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -162,7 +159,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 break;
 
             case R.id.buttonBack:
-                etLCD.setText(etLCD.getText().toString().substring(0, etLCD.getText().toString().length() - 1));
+                if (!etLCD.getText().toString().equals(""))
+                    etLCD.setText(etLCD.getText().toString().substring(0, etLCD.getText().toString().length() - 1));
                 break;
 
             case R.id.buttonBraces:
@@ -232,13 +230,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             int brCount1 = s.split("\\(", -1).length - 1;
             int brCount2 = s.split("\\)", -1).length - 1;
             char c=s.charAt(s.length() - 1);
-            if (brCount1==0) etLCD.setText(etLCD.getText().toString() + "(");
-            else
-            {
-                if ("+-*/%".indexOf(c) > -1) etLCD.setText(etLCD.getText().toString() + "(");
-                if (Character.isDigit(c)&&brCount1>brCount2) etLCD.setText(etLCD.getText().toString() + ")");
-                if (c==')'&&brCount1>brCount2) etLCD.setText(etLCD.getText().toString() + ")");
-            }
+            if ("+-*/%".indexOf(c) > -1) etLCD.setText(etLCD.getText().toString() + "(");
+            if (Character.isDigit(c)&&brCount1>brCount2) etLCD.setText(etLCD.getText().toString() + ")");
+            if (c==')'&&brCount1>brCount2) etLCD.setText(etLCD.getText().toString() + ")");
 
         }
     }
@@ -281,13 +275,63 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 double res =parser.Parse(expression);
                 long r = Math.round(res);
                 if (r==res) {
+                    saveFile(etLCD.getText().toString()+"="+Integer.toString((int) r));
                     etLCD.setText(Integer.toString((int) r));
                 } else
-                    etLCD.setText(Double.toString(res));
+                {
+                    if (Double.toString(res).equals("Infinity")||Double.toString(res).equals("NaN"))
+                        etLCD.setText(Double.toString(res));
+                    else {
+                        DecimalFormat df = new DecimalFormat("#.##########");
+                        df.setRoundingMode(RoundingMode.CEILING);
+                        etLCD.setText(df.format(res).replace(',', '.'));
+                    }
+                }
                 isRes=true;
             } catch(Exception e){
-                System.out.println(e.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        "Exception: " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
 
+    }
+
+    private void saveFile(String text) {
+        try {
+            String line;
+            line=readFile();
+            line="\n"+text+"\n"+line;
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(openFileOutput("hist.txt", MODE_WORLD_READABLE)));
+            bw.write(line);
+            bw.flush();
+            bw.close();
+
+        } catch (Throwable t) {
+            Toast.makeText(getApplicationContext(),
+                    "Exception: " + t.toString(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private String readFile() {
+        try {
+            InputStream inputStream = openFileInput("hist.txt");
+
+            if (inputStream != null) {
+                BufferedReader br = new BufferedReader(new InputStreamReader(
+                        openFileInput("hist.txt")));
+                String line;
+                StringBuilder builder = new StringBuilder();
+
+                while ((line = br.readLine()) != null) {
+                    builder.append(line + "\n");
+                }
+
+                inputStream.close();
+                return builder.toString();
+            }
+        } catch (Throwable t) {
+            Toast.makeText(getApplicationContext(),
+                    "Exception: " + t.toString(), Toast.LENGTH_LONG).show();
+        }
+        return "";
     }
 }

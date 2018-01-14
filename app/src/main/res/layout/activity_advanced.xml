@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.nadya.mycalc.MainActivity">
+    tools:context="com.example.nadya.mycalc.AdvancedActivity">
 
     <LinearLayout
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" >
-
+        android:orientation="vertical" >>
 
         <TextView
             android:id="@+id/infoTextView"
@@ -23,8 +22,7 @@
         <TextView
             android:id="@+id/editText"
             android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             android:layout_below="@id/infoTextView"
             android:layout_weight="0"
             android:lines="3"
@@ -59,6 +57,29 @@
                 app:layout_constraintTop_toBottomOf="@+id/editText" />
 
             <Button
+                android:id="@+id/buttonExp"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:layout_weight="1"
+                android:text="e"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/buttonBack"
+                app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+            <Button
+                android:id="@+id/buttonPi"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="П"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/buttonExp"
+                app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+            <Button
                 android:id="@+id/buttonPers"
                 style="@android:style/Widget.Button"
                 android:layout_width="wrap_content"
@@ -67,20 +88,9 @@
                 android:layout_weight="1"
                 android:text="%"
                 android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@+id/buttonBack"
+                app:layout_constraintStart_toEndOf="@+id/buttonPi"
                 app:layout_constraintTop_toBottomOf="@+id/editText" />
 
-            <Button
-                android:id="@+id/buttonDivide"
-                style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:layout_weight="1"
-                android:text="/"
-                android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@+id/buttonDivide"
-                app:layout_constraintTop_toBottomOf="@+id/editText" />
 
         </LinearLayout>
 
@@ -90,14 +100,93 @@
             android:layout_height="wrap_content" >
 
             <Button
+                android:id="@+id/buttonSin"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:text="sin"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/buttonClear" />
+
+            <Button
+                android:id="@+id/buttonSqrt"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:text="sqrt"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/buttonSin"
+                app:layout_constraintTop_toBottomOf="@+id/buttonClear" />
+
+            <Button
+                android:id="@+id/buttonSquare"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:text="x^2"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/buttonSqrt"
+                app:layout_constraintTop_toBottomOf="@+id/buttonClear" />
+
+            <Button
+                android:id="@+id/buttonDeg"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:text="x^y"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/buttonSquare"
+                app:layout_constraintTop_toBottomOf="@+id/buttonClear" />
+
+            <Button
+                android:id="@+id/buttonDivide"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:text="/"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonClear" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/buttonCos"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:text="cos"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/buttonClear" />
+
+            <Button
                 android:id="@+id/buttonSeven"
                 style="@android:style/Widget.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:text="7"
                 android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/buttonCos"
                 app:layout_constraintTop_toBottomOf="@+id/buttonClear" />
 
             <Button
@@ -105,7 +194,7 @@
                 style="@android:style/Widget.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:text="8"
                 android:textSize="20sp"
@@ -117,19 +206,20 @@
                 style="@android:style/Widget.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:text="9"
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@+id/buttonEight"
                 app:layout_constraintTop_toBottomOf="@+id/buttonClear" />
 
+
             <Button
                 android:id="@+id/buttonMultiply"
                 style="@android:style/Widget.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:text="*"
                 android:textSize="20sp"
@@ -144,14 +234,26 @@
             android:layout_height="wrap_content" >
 
             <Button
+                android:id="@+id/buttonTan"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:text="tan"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/buttonClear" />
+
+            <Button
                 android:id="@+id/buttonFour"
                 style="@android:style/Widget.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:text="4"
                 android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/buttonTan"
                 app:layout_constraintTop_toBottomOf="@+id/buttonSeven" />
 
             <Button
@@ -159,7 +261,7 @@
                 style="@android:style/Widget.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:text="5"
                 android:textSize="20sp"
@@ -171,7 +273,7 @@
                 style="@android:style/Widget.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:text="6"
                 android:textSize="20sp"
@@ -183,7 +285,7 @@
                 style="@android:style/Widget.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:text="+"
                 android:textSize="20sp"
@@ -198,14 +300,26 @@
             android:layout_height="wrap_content" >
 
             <Button
+                android:id="@+id/buttonLn"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:text="ln"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/buttonClear" />
+
+            <Button
                 android:id="@+id/buttonOne"
                 style="@android:style/Widget.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:text="1"
                 android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/buttonLn"
                 app:layout_constraintTop_toBottomOf="@+id/buttonFour" />
 
             <Button
@@ -213,7 +327,7 @@
                 style="@android:style/Widget.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:text="2"
                 android:textSize="20sp"
@@ -225,7 +339,7 @@
                 style="@android:style/Widget.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:text="3"
                 android:textSize="20sp"
@@ -237,7 +351,7 @@
                 style="@android:style/Widget.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:text="-"
                 android:textSize="20sp"
@@ -249,17 +363,29 @@
         <LinearLayout
 
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >>
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/buttonLg"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:text="lg"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/buttonClear" />
 
             <Button
                 android:id="@+id/buttonBraces"
                 style="@android:style/Widget.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:text="( )"
                 android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/buttonLg"
                 app:layout_constraintTop_toBottomOf="@+id/buttonOne" />
 
             <Button
@@ -267,7 +393,7 @@
                 style="@android:style/Widget.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:text="0"
                 android:textSize="20sp"
@@ -279,7 +405,7 @@
                 style="@android:style/Widget.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:text="."
                 android:textSize="20sp"
@@ -291,7 +417,7 @@
                 style="@android:style/Widget.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:text="="
                 android:textSize="20sp"
