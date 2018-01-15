@@ -1,7 +1,7 @@
 package com.example.nadya.mycalc;
 
-import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -19,15 +19,16 @@ import android.widget.Toast;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener {
 
     Button btOne, btTwo, btThree, btFour, btFive, btSix, btSeven, btEight, btNine, btZero;
     Button btPlus, btMinus, btMulti, btDiv, btEqual, btClear, btDot, btPer, btBack, btBrace;
+    Button btAbs, btFrac, btSqr,  btSqrt, btFact;
     TextView tvLCD, etLCD;
     boolean isRes;
+    String expr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +53,20 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             bt_arr[i].setOnClickListener(this);
         }
 
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+        {
+            btAbs = (Button) findViewById(R.id.buttonAbs);
+            btFrac = (Button) findViewById(R.id.buttonFrac);
+            btSqr = (Button) findViewById(R.id.buttonSqr);
+            btSqrt = (Button) findViewById(R.id.buttonSqrt);
+            btFact = (Button) findViewById(R.id.buttonFact);
+        }
 
         tvLCD = (TextView) findViewById(R.id.infoTextView);
         etLCD = (TextView) findViewById(R.id.editText);
 
         tvLCD.setOnClickListener(this);
+        expr="";
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -171,6 +181,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 Calculate();
                 break;
 
+            case R.id.buttonAbs:
+                ClickFunc("abs");
+                break;
+
+
             case R.id.infoTextView:
                 String s = etLCD.getText().toString();
                 char c = s.charAt(s.length() - 1);
@@ -233,7 +248,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             if ("+-*/%".indexOf(c) > -1) etLCD.setText(etLCD.getText().toString() + "(");
             if (Character.isDigit(c)&&brCount1>brCount2) etLCD.setText(etLCD.getText().toString() + ")");
             if (c==')'&&brCount1>brCount2) etLCD.setText(etLCD.getText().toString() + ")");
-
+            if (c=='(') etLCD.setText(etLCD.getText().toString() + "(");
         }
     }
 
@@ -267,6 +282,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         }
     }
 
+    private void ClickFunc(String f){
+
+    }
+
+
     private void Calculate(){
         MathParser parser = new MathParser();
         String expression = etLCD.getText().toString();
@@ -282,9 +302,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                     if (Double.toString(res).equals("Infinity")||Double.toString(res).equals("NaN"))
                         etLCD.setText(Double.toString(res));
                     else {
+                        String s=etLCD.getText().toString()+"=";
                         DecimalFormat df = new DecimalFormat("#.##########");
                         df.setRoundingMode(RoundingMode.CEILING);
                         etLCD.setText(df.format(res).replace(',', '.'));
+                        saveFile(s+etLCD.getText().toString());
                     }
                 }
                 isRes=true;

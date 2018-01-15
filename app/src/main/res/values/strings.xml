@@ -5,4 +5,29 @@
     <string name="item2">Themes</string>
     <string name="item3">History</string>
     <string name="title_activity_history">History</string>
+    <string name="c">C</string>
+    <string name="_8">8</string>
+    <string name="_back">←</string>
+    <string name="_mod">%</string>
+    <string name="_4">4</string>
+    <string name="_div">/</string>
+    <string name="_7">7</string>
+    <string name="_9">9</string>
+    <string name="_mul">*</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_add">+</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_sub">-</string>
+    <string name="_br">( )</string>
+    <string name="_0">0</string>
+    <string name="_dot">.</string>
+    <string name="_eq">=</string>
+    <string name="_abs">|x|</string>
+    <string name="_1_x">1/x</string>
+    <string name="_fact">x!</string>
+    <string name="_sqr">x^2</string>
+    <string name="_sqrt">√x</string>
 </resources>
