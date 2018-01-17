@@ -5,7 +5,7 @@
     <string name="item2">Themes</string>
     <string name="item3">History</string>
     <string name="title_activity_history">History</string>
-    <string name="c">C</string>
+    <string name="_clean">C</string>
     <string name="_8">8</string>
     <string name="_back">←</string>
     <string name="_mod">%</string>
@@ -30,4 +30,5 @@
     <string name="_fact">x!</string>
     <string name="_sqr">x^2</string>
     <string name="_sqrt">√x</string>
+
 </resources>

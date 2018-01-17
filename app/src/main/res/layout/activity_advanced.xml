@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/c"
+                android:text="@string/_clean"
                 android:textSize="20sp"
                 app:layout_constraintTop_toBottomOf="@+id/editText" />
 
@@ -90,7 +90,6 @@
                 android:layout_weight="1"
                 android:text="π"
                 android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@+id/buttonExp"
                 app:layout_constraintTop_toBottomOf="@+id/editText" />
 
             <Button
@@ -101,7 +100,6 @@
                 android:layout_weight="1"
                 android:text="@string/_mod"
                 android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@+id/buttonPi"
                 app:layout_constraintTop_toBottomOf="@+id/editText" />
 
 
@@ -135,7 +133,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/buttonClear" />
 
             <Button
-                android:id="@+id/buttonSquare"
+                android:id="@+id/buttonSqr"
                 style="@android:style/Widget.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

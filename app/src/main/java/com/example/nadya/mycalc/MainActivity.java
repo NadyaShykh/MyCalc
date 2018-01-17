@@ -25,10 +25,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
     Button btOne, btTwo, btThree, btFour, btFive, btSix, btSeven, btEight, btNine, btZero;
     Button btPlus, btMinus, btMulti, btDiv, btEqual, btClear, btDot, btPer, btBack, btBrace;
-    Button btAbs, btFrac, btSqr,  btSqrt, btFact;
-    TextView tvLCD, etLCD;
+    Button btDec, btFrac, btSqr,  btSqrt, btFact;
+    TextView tvLCD;
+    public TextView etLCD;
     boolean isRes;
-    String expr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,18 +55,22 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
         {
-            btAbs = (Button) findViewById(R.id.buttonAbs);
+            btDec = (Button) findViewById(R.id.buttonDecDeg);
             btFrac = (Button) findViewById(R.id.buttonFrac);
             btSqr = (Button) findViewById(R.id.buttonSqr);
             btSqrt = (Button) findViewById(R.id.buttonSqrt);
             btFact = (Button) findViewById(R.id.buttonFact);
+            btDec.setOnClickListener(this);
+            btFrac.setOnClickListener(this);
+            btSqr.setOnClickListener(this);
+            btSqrt.setOnClickListener(this);
+            btFact.setOnClickListener(this);
         }
 
         tvLCD = (TextView) findViewById(R.id.infoTextView);
         etLCD = (TextView) findViewById(R.id.editText);
 
         tvLCD.setOnClickListener(this);
-        expr="";
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -165,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 if (etLCD.getText().toString().equals(""))
                     tvLCD.setText("");
                 etLCD.setText("");
-                //дописати очистку змінних
+                isRes=false;
                 break;
 
             case R.id.buttonBack:
@@ -181,11 +185,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 Calculate();
                 break;
 
-            case R.id.buttonAbs:
-                ClickFunc("abs");
-                break;
-
-
             case R.id.infoTextView:
                 String s = etLCD.getText().toString();
                 char c = s.charAt(s.length() - 1);
@@ -195,6 +194,31 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                     etLCD.setText(tvLCD.getText().toString());
                 isRes=false;
                 break;
+        }
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+        {
+            switch(v.getId()) {
+                case R.id.buttonDecDeg:
+                    ClickFunc(1);
+                    break;
+
+                case R.id.buttonFrac:
+                    ClickFunc(2);
+                    break;
+
+                case R.id.buttonSqrt:
+                    ClickFunc(3);
+                    break;
+
+                case R.id.buttonSqr:
+                    ClickFunc(4);
+                    break;
+
+                case R.id.buttonFact:
+                    ClickFunc(5);
+                    break;
+            }
         }
     }
 
@@ -215,15 +239,15 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         c = 'a';
         if (s.equals(""))
         {
-           if (Character.isDigit(symb)||"-()".indexOf(symb) > -1)
-               etLCD.setText(etLCD.getText().toString() + symb);
+            if (Character.isDigit(symb)||"-()".indexOf(symb) > -1)
+                etLCD.setText(etLCD.getText().toString() + symb);
         }
         else
         {
             c = s.charAt(s.length() - 1);
-            if ("+-*/%".indexOf(symb) > -1)
+            if ("+-*/%".indexOf(symb) > -1) // вивід знаку операції, тут включити факторіал
             {
-                if (Character.isDigit(c))
+                if (Character.isDigit(c)||c=='!')
                     etLCD.setText(etLCD.getText().toString() + symb);
                 else
                 {
@@ -238,6 +262,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     }
 
     private void ClickBr(){
+        AddRes();
         String s = etLCD.getText().toString();
         if (s.equals(""))
             etLCD.setText("(");
@@ -249,6 +274,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             if (Character.isDigit(c)&&brCount1>brCount2) etLCD.setText(etLCD.getText().toString() + ")");
             if (c==')'&&brCount1>brCount2) etLCD.setText(etLCD.getText().toString() + ")");
             if (c=='(') etLCD.setText(etLCD.getText().toString() + "(");
+            if (c=='!'&&brCount1>brCount2) etLCD.setText(etLCD.getText().toString() + ")");
         }
     }
 
@@ -272,25 +298,70 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                     else
                     {
                         if ((s.lastIndexOf('+')>s.lastIndexOf('.'))||(s.lastIndexOf('-')>s.lastIndexOf('.'))
-                            ||(s.lastIndexOf('*')>s.lastIndexOf('.'))||(s.lastIndexOf('/')>s.lastIndexOf('.'))
-                            ||(s.lastIndexOf('%')>s.lastIndexOf('.')))
+                                ||(s.lastIndexOf('*')>s.lastIndexOf('.'))||(s.lastIndexOf('/')>s.lastIndexOf('.'))
+                                ||(s.lastIndexOf('%')>s.lastIndexOf('.')))
                             etLCD.setText(etLCD.getText().toString() + ".");
                     }
-
                 }
             }
         }
     }
 
-    private void ClickFunc(String f){
+    private void ClickFunc(int f){
+        if (!(f==4||f==5)) AddRes();
+        String s = etLCD.getText().toString();
+        char c='1';
+        if (!s.equals("")){
+            c=s.charAt(s.length() - 1);
+        }
+        if (s.equals("")||("+-*/%".indexOf(c) > -1))
+        {
+            switch(f) {
+                case 1:
+                    etLCD.setText(etLCD.getText().toString() + "10^(");
+                    break;
 
+                case 2:
+                    etLCD.setText(etLCD.getText().toString() + "1/");
+                    break;
+
+                case 3:
+                    etLCD.setText(etLCD.getText().toString() + "√");
+                    break;
+
+            }
+        }
+        if (Character.isDigit(c)||c==')')
+        {
+            switch(f) {
+                case 4:
+                    etLCD.setText(etLCD.getText().toString() + "^(2)");
+                    break;
+
+                case 5:
+                    etLCD.setText(etLCD.getText().toString() + "!");
+                    break;
+            }
+        }
+    }
+
+    private void AddRes(){
+        if (isRes) {
+            if (etLCD.getText().toString().equals("Infinity")||etLCD.getText().toString().equals("NaN"))
+                etLCD.setText("");
+            else {
+                tvLCD.setText(etLCD.getText().toString());
+                etLCD.setText("");
+            }
+            isRes=false;
+        }
     }
 
 
     private void Calculate(){
         MathParser parser = new MathParser();
         String expression = etLCD.getText().toString();
-
+        expression=FuncCorrect(expression);
             try{
                 double res =parser.Parse(expression);
                 long r = Math.round(res);
@@ -312,16 +383,53 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 isRes=true;
             } catch(Exception e){
                 Toast.makeText(getApplicationContext(),
-                        "Exception: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
 
+    }
+
+    private String FuncCorrect(String ex) {
+        ex=ex.replaceAll("√","sqrt");
+        char c='1';
+        int ind, ident=ex.indexOf('!');
+        while (ident > -1){
+            String tmp=ex.substring(0,ident);
+            c=tmp.charAt(tmp.length() - 1);
+            ex=removeCharAt(ex, ident);
+            if (c==')')
+            {
+                ind=tmp.lastIndexOf('(');
+                ex=ex.substring(0, ind)+"fact"+ex.substring(ind);
+            }
+            else
+            {
+                ind=0;
+                for (int i=tmp.length()-1; i>=0; i--){
+                    if (!Character.isDigit(tmp.charAt(i)))
+                        {
+                            if (tmp.charAt(i)!='.')
+                                ind=i+1;
+                                break;
+                        }
+                }
+                ex=ex.substring(0, ident)+")"+ex.substring(ident);
+                ex=ex.substring(0, ind)+"fact("+ex.substring(ind);
+            }
+            ident=ex.indexOf('!');
+        }
+        return ex;
+    }
+
+    private String removeCharAt(String s, int pos) {
+        return s.substring(0, pos) + s.substring(pos + 1); // Возвращаем подстроку s, которая начиная с нулевой позиции переданной строки (0) и заканчивается позицией символа (pos), который мы хотим удалить, соединенную с другой подстрокой s, которая начинается со следующей позиции после позиции символа (pos + 1), который мы удаляем, и заканчивается последней позицией переданной строки.
     }
 
     private void saveFile(String text) {
         try {
             String line;
             line=readFile();
-            line="\n"+text+"\n"+line;
+            if (line.equals(""))
+                line="\n"+text+"\n"+line;
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(openFileOutput("hist.txt", MODE_WORLD_READABLE)));
             bw.write(line);
             bw.flush();
@@ -329,7 +437,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
         } catch (Throwable t) {
             Toast.makeText(getApplicationContext(),
-                    "Exception: " + t.toString(), Toast.LENGTH_LONG).show();
+                    t.toString(), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -351,8 +459,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 return builder.toString();
             }
         } catch (Throwable t) {
-            Toast.makeText(getApplicationContext(),
-                    "Exception: " + t.toString(), Toast.LENGTH_LONG).show();
+            return "";//Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
         }
         return "";
     }

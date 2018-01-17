@@ -3,6 +3,7 @@ package com.example.nadya.mycalc;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 
 /**
@@ -303,8 +304,14 @@ public class MathParser {
                 return new Result(Math.log10(r.acc), r.rest);
             case "sqrt":
                 return new Result(Math.sqrt(r.acc), r.rest);
+            case "fact":
+                long tr = Math.round(r.acc);
+                if (tr==r.acc && tr>-1)
+                    return new Result((double)fact(r.acc), r.rest);
+                else
+                    throw new Exception("Argument of factorial '" + Double.toString(r.acc) + "' is not correct");
             default:
-                throw new Exception("function '" + func + "' is not defined");
+                throw new Exception("Function '" + func + "' is not defined");
         }
     }
     private Result processFunction(String func,
@@ -317,9 +324,14 @@ public class MathParser {
             case "xor": // виняток або
                 return new Result((int)acc ^ (int)r.acc,r.rest);
             default:
-                throw new Exception("function '" + func +
+                throw new Exception("Function '" + func +
                         "' is not defined");
         }
+    }
+
+    public static double fact(double num) {
+        if (num == 0||num == 1) return 1;
+        return num*fact(num-1);
     }
 
     private String skipSpaces(String s){
