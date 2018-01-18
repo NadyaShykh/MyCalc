@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.view.View.OnClickListener;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import android.view.Menu;
@@ -426,10 +427,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
     private void saveFile(String text) {
         try {
-            String line;
-            line=readFile();
-            if (line.equals(""))
-                line="\n"+text+"\n"+line;
+            String line="";
+            File f = new File(getFilesDir() + "/hist.txt");
+            if (f.exists())
+                line=readFile();
+            line="\n"+text+"\n"+line;
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(openFileOutput("hist.txt", MODE_WORLD_READABLE)));
             bw.write(line);
             bw.flush();
@@ -459,7 +461,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 return builder.toString();
             }
         } catch (Throwable t) {
-            return "";//Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
         }
         return "";
     }

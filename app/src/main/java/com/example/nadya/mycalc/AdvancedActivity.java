@@ -1,6 +1,7 @@
 package com.example.nadya.mycalc;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -21,10 +23,10 @@ import java.text.DecimalFormat;
 public class AdvancedActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button btOne, btTwo, btThree, btFour, btFive, btSix, btSeven, btEight, btNine, btZero;
-    Button btPlus, btMinus, btMulti, btDiv, btEqual, btClear, btDot, btPer, btBack, btBrace;
-    Button btExp, btPi, btSin, btSqrt, btSqr, btDeg, btCos, btTan, btLn, btLg;
+    Button btPlus, btMinus, btMulti, btDiv, btEqual, btClear, btDot, btAbs, btBack, btBrace;
+    Button btExp, btPi, btSin, btSqrt, btSqr, btPow, btCos, btTan, btLn, btLg;
+    Button btSec, btCosec, btSinH, btCosH, btTanH, btFact, btFrac, btTwoDeg, btDec, btExpDeg;
 
-    //Button btFrac,   btFact;
     TextView tvLCD;
     TextView etLCD;
     boolean isRes;
@@ -41,17 +43,42 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
         bt_ids = new int[]{R.id.buttonOne, R.id.buttonTwo, R.id.buttonThree, R.id.buttonFour, R.id.buttonFive,
                 R.id.buttonSix, R.id.buttonSeven, R.id.buttonEight, R.id.buttonNine, R.id.buttonZero,
                 R.id.buttonAdd, R.id.buttonSubstract,R.id.buttonMultiply, R.id.buttonDivide, R.id.buttonEqual,
-                R.id.buttonClear, R.id.buttonDot, R.id.buttonPers, R.id.buttonBack, R.id.buttonBraces, R.id.buttonExp, R.id.buttonPi,
-                R.id.buttonSin, R.id.buttonSqrt, R.id.buttonSqr, R.id.buttonDeg, R.id.buttonCos, R.id.buttonTan, R.id.buttonLn, R.id.buttonLg};
+                R.id.buttonClear, R.id.buttonDot, R.id.buttonAbs, R.id.buttonBack, R.id.buttonBraces, R.id.buttonExp, R.id.buttonPi,
+                R.id.buttonSin, R.id.buttonSqrt, R.id.buttonSqr, R.id.buttonPow, R.id.buttonCos, R.id.buttonTan, R.id.buttonLn, R.id.buttonLg};
 
         bt_arr = new Button[]{btOne, btTwo, btThree, btFour, btFive, btSix, btSeven, btEight, btNine, btZero,
-                btPlus, btMinus, btMulti, btDiv, btEqual, btClear, btDot, btPer, btBack, btBrace, btExp, btPi,
-                btSin, btSqrt, btSqr, btDeg, btCos, btTan, btLn, btLg};
+                btPlus, btMinus, btMulti, btDiv, btEqual, btClear, btDot, btAbs, btBack, btBrace, btExp, btPi,
+                btSin, btSqrt, btSqr, btPow, btCos, btTan, btLn, btLg};
 
         for (int i = 0, n = bt_arr.length; i < n; i++)
         {
             bt_arr[i] = (Button) findViewById(bt_ids[i]);
             bt_arr[i].setOnClickListener(this);
+        }
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+        {
+            btSec = (Button) findViewById(R.id.buttonSec);
+            btCosec = (Button) findViewById(R.id.buttonCosec);
+            btSinH = (Button) findViewById(R.id.buttonSinH);
+            btCosH = (Button) findViewById(R.id.buttonCosH);
+            btTanH = (Button) findViewById(R.id.buttonTanH);
+            btFact = (Button) findViewById(R.id.buttonFact);
+            btFrac = (Button) findViewById(R.id.buttonFrac);
+            btTwoDeg = (Button) findViewById(R.id.buttonTwoDeg);
+            btDec = (Button) findViewById(R.id.buttonDecDeg);
+            btExpDeg = (Button) findViewById(R.id.buttonExpDeg);
+
+            btSec.setOnClickListener(this);
+            btCosec.setOnClickListener(this);
+            btSinH.setOnClickListener(this);
+            btCosH.setOnClickListener(this);
+            btTanH.setOnClickListener(this);
+            btFact.setOnClickListener(this);
+            btFrac.setOnClickListener(this);
+            btTwoDeg.setOnClickListener(this);
+            btDec.setOnClickListener(this);
+            btExpDeg.setOnClickListener(this);
         }
 
         tvLCD = (TextView) findViewById(R.id.infoTextView);
@@ -147,9 +174,9 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
                 ClickSymb('-');
                 break;
 
-            case R.id.buttonPers:
+            /*case R.id.buttonPers:
                 ClickSymb('%');
-                break;
+                break;*/
 
             case R.id.buttonClear:
                 if (etLCD.getText().toString().equals(""))
@@ -189,7 +216,39 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
                 ClickSymb('π');
                 break;
 
-                //, R.id.buttonPi, R.id.buttonSin, R.id.buttonSqrt, R.id.buttonSqr, R.id.buttonDeg, R.id.buttonCos, R.id.buttonTan, R.id.buttonLn, R.id.buttonLg
+            case R.id.buttonSin:
+                ClickFunc(4);
+                break;
+
+            case R.id.buttonSqrt:
+                ClickFunc(3);
+                break;
+
+            case R.id.buttonSqr:
+                ClickFunc(9);
+                break;
+
+            case R.id.buttonPow:
+                ClickFunc(10);
+                break;
+
+            case R.id.buttonCos:
+                ClickFunc(5);
+                break;
+
+            case R.id.buttonTan:
+                ClickFunc(6);
+                break;
+
+            case R.id.buttonLn:
+                ClickFunc(7);
+                break;
+
+            case R.id.buttonLg:
+                ClickFunc(8);
+                break;
+
+                // R.id.buttonLn, R.id.buttonLg
         }
     }
 
@@ -285,7 +344,7 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void ClickFunc(int f){
-        if (!(f==4||f==5)) AddRes();
+        if (!(f==4||f==5)) AddRes();// замінити нумерацію
         String s = etLCD.getText().toString();
         char c='1';
         if (!s.equals("")){
@@ -306,18 +365,42 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
                     etLCD.setText(etLCD.getText().toString() + "√");
                     break;
 
+                case 4:
+                    etLCD.setText(etLCD.getText().toString() + "sin(");
+                    break;
+
+                case 5:
+                    etLCD.setText(etLCD.getText().toString() + "cos(");
+                    break;
+
+                case 6:
+                    etLCD.setText(etLCD.getText().toString() + "tan(");
+                    break;
+
+                case 7:
+                    etLCD.setText(etLCD.getText().toString() + "cos(");
+                    break;
+
+                case 8:
+                    etLCD.setText(etLCD.getText().toString() + "tan(");
+                    break;
+
             }
         }
         if (Character.isDigit(c)||c==')')
         {
             switch(f) {
-                case 4:
+                case 9:
                     etLCD.setText(etLCD.getText().toString() + "^(2)");
                     break;
 
-                case 5:
-                    etLCD.setText(etLCD.getText().toString() + "!");
+                case 10:
+                    etLCD.setText(etLCD.getText().toString() + "^(");
                     break;
+
+                /*case :
+                    etLCD.setText(etLCD.getText().toString() + "!");
+                    break;*/
             }
         }
     }
@@ -404,10 +487,11 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
 
     private void saveFile(String text) {
         try {
-            String line;
-            line=readFile();
-            if (line.equals(""))
-                line="\n"+text+"\n"+line;
+            String line="";
+            File f = new File(getFilesDir() + "/hist.txt");
+            if (f.exists())
+                line=readFile();
+            line="\n"+text+"\n"+line;
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(openFileOutput("hist.txt", MODE_WORLD_READABLE)));
             bw.write(line);
             bw.flush();
@@ -437,7 +521,7 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
                 return builder.toString();
             }
         } catch (Throwable t) {
-            return "";//Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
         }
         return "";
     }
