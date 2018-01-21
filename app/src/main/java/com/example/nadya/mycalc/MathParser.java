@@ -2,22 +2,25 @@ package com.example.nadya.mycalc;
 
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.widget.Toast;
 
-import java.math.BigInteger;
+import com.example.nadya.mycalc.AdvancedActivity;
 import java.util.HashMap;
 
 /**
  * Метод рекурсивного спуску для інтерпретації математичних виразів.
  * Підтримуються математичні функції з 1 і 2 параметрами.
  */
-public class MathParser {
+public class MathParser extends AdvancedActivity {
 
     private static HashMap<String, Double> var;
+    private static boolean isRad;
 
     public MathParser() {
         var = new HashMap<>();
         setVariable("pi",Math.PI);
         setVariable("e",Math.E);
+        isRad=false;
     }
 
 
@@ -60,9 +63,10 @@ public class MathParser {
      * @return результат
      * @throws Exception
      */
-    public double Parse(String s) throws Exception {
+    public double Parse(String s, boolean r) throws Exception {
         if(s.isEmpty())
             throw new Exception("Empty expression");
+        isRad=r;
         Result result = binaryFunc(s);
         if (!result.rest.isEmpty())
             throw new Exception("Error: can't full parse \n "+
@@ -277,21 +281,26 @@ public class MathParser {
     }
 
     private Result processFunction(String func, Result r) throws Exception{
+        double ang;
+        if (isRad)
+            ang=r.acc;
+        else
+            ang=Math.toRadians(r.acc);
         switch (func) {
             case "sin":
-                return new Result(Math.sin(r.acc), r.rest);
+                return new Result(Math.sin(ang), r.rest);
             case "sinh": // гіперболічний синус
                 return new Result(Math.sinh(r.acc), r.rest);
             case "cos":
-                return new Result(Math.cos(r.acc), r.rest);
+                return new Result(Math.cos(ang), r.rest);
             case "cosh": // гіперболічний косинус
                 return new Result(Math.cosh(r.acc), r.rest);
             case "tan":
-                return new Result(Math.tan(r.acc), r.rest);
+                return new Result(Math.tan(ang), r.rest);
             case "tanh": // гіперболічний тангенс
                 return new Result(Math.tanh(r.acc), r.rest);
             case "ctg":
-                return new Result(1/Math.tan(r.acc), r.rest);
+                return new Result(1/Math.tan(ang), r.rest);
             case "sec": // секанс
                 return new Result(1/Math.cos(r.acc), r.rest);
             case "cosec": // косеканс

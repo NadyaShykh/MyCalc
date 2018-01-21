@@ -99,6 +99,20 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("result", etLCD.getText().toString());
+        outState.putString("memory", tvLCD.getText().toString());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        etLCD.setText(savedInstanceState.getString("result"));
+        tvLCD.setText(savedInstanceState.getString("memory"));
+    }
+
+    @Override
     public void onClick(View v) {
 
         switch(v.getId()) {
@@ -271,7 +285,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             int brCount1 = s.split("\\(", -1).length - 1;
             int brCount2 = s.split("\\)", -1).length - 1;
             char c=s.charAt(s.length() - 1);
-            if ("+-*/%".indexOf(c) > -1) etLCD.setText(etLCD.getText().toString() + "(");
+            if ("+-*/%√".indexOf(c) > -1) etLCD.setText(etLCD.getText().toString() + "(");
             if (Character.isDigit(c)&&brCount1>brCount2) etLCD.setText(etLCD.getText().toString() + ")");
             if (c==')'&&brCount1>brCount2) etLCD.setText(etLCD.getText().toString() + ")");
             if (c=='(') etLCD.setText(etLCD.getText().toString() + "(");
@@ -315,7 +329,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         if (!s.equals("")){
             c=s.charAt(s.length() - 1);
         }
-        if (s.equals("")||("+-*/%".indexOf(c) > -1))
+        if (s.equals("")||("+-*/%(".indexOf(c) > -1))
         {
             switch(f) {
                 case 1:
@@ -327,7 +341,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                     break;
 
                 case 3:
-                    etLCD.setText(etLCD.getText().toString() + "√");
+                    etLCD.setText(etLCD.getText().toString() + "√(");
                     break;
 
             }
@@ -364,7 +378,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         String expression = etLCD.getText().toString();
         expression=FuncCorrect(expression);
             try{
-                double res =parser.Parse(expression);
+                double res =parser.Parse(expression, true);
                 long r = Math.round(res);
                 if (r==res) {
                     saveFile(etLCD.getText().toString()+"="+Integer.toString((int) r));
@@ -391,6 +405,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
     private String FuncCorrect(String ex) {
         ex=ex.replaceAll("√","sqrt");
+
         char c='1';
         int ind, ident=ex.indexOf('!');
         while (ident > -1){

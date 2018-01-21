@@ -27,9 +27,9 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
     Button btExp, btPi, btSin, btSqrt, btSqr, btPow, btCos, btTan, btLn, btLg;
     Button btSec, btCosec, btSinH, btCosH, btTanH, btFact, btFrac, btTwoDeg, btDec, btExpDeg;
 
-    TextView tvLCD;
-    TextView etLCD;
+    TextView tvLCD, etLCD, tvDegRad;
     boolean isRes;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,8 +83,10 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
 
         tvLCD = (TextView) findViewById(R.id.infoTextView);
         etLCD = (TextView) findViewById(R.id.editText);
+        tvDegRad = (TextView) findViewById(R.id.infoDegRad);
 
         tvLCD.setOnClickListener(this);
+        tvDegRad.setOnClickListener(this);
     }
 
     @Override
@@ -109,6 +111,20 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("result", etLCD.getText().toString());
+        outState.putString("memory", tvLCD.getText().toString());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        etLCD.setText(savedInstanceState.getString("result"));
+        tvLCD.setText(savedInstanceState.getString("memory"));
     }
 
     @Override
@@ -173,10 +189,6 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
             case R.id.buttonSubstract:
                 ClickSymb('-');
                 break;
-
-            /*case R.id.buttonPers:
-                ClickSymb('%');
-                break;*/
 
             case R.id.buttonClear:
                 if (etLCD.getText().toString().equals(""))
@@ -248,8 +260,71 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
                 ClickFunc(8);
                 break;
 
-                // R.id.buttonLn, R.id.buttonLg
+            case R.id.buttonAbs:
+                ClickFunc(19);
+                break;
+
+            case R.id.infoDegRad:
+                if (tvDegRad.getText().toString().equals("Rad"))
+                {
+                    tvDegRad.setText("Deg");
+                }
+                else {
+                    tvDegRad.setText("Rad");
+                }
+
+                break;
         }
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+        {
+            switch(v.getId()) {
+                case R.id.buttonSec:
+                    ClickFunc(11);
+                    break;
+
+                case R.id.buttonCosec:
+                    ClickFunc(12);
+                    break;
+
+                case R.id.buttonSinH:
+                    ClickFunc(13);
+                    break;
+
+                case R.id.buttonCosH:
+                    ClickFunc(14);
+                    break;
+
+                case R.id.buttonTanH:
+                    ClickFunc(15);
+                    break;
+
+                case R.id.buttonFact:
+                    ClickFunc(16);
+                    break;
+
+                case R.id.buttonFrac:
+                    ClickFunc(2);
+                    break;
+
+                case R.id.buttonTwoDeg:
+                    ClickFunc(17);
+                    break;
+
+                case R.id.buttonDecDeg:
+                    ClickFunc(1);
+                    break;
+
+                case R.id.buttonExpDeg:
+                    ClickFunc(18);
+                    break;
+            }
+        }
+    }
+
+    public boolean isRad()
+    {
+        return (tvDegRad.getText().toString().equals("Rad"));
     }
 
     private void ClickSymb(char symb){
@@ -285,6 +360,14 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
                         etLCD.setText(etLCD.getText().toString() + symb);
                     if (")".indexOf(c) > -1)
                         etLCD.setText(etLCD.getText().toString() + symb);
+
+                    if ("|".indexOf(c) > -1) {
+                        int brCount1 = s.split("\\|", -1).length - 1;
+                        if (brCount1%2==0)
+                            etLCD.setText(etLCD.getText().toString() + symb);
+                        else
+                            if (symb == '-') etLCD.setText(etLCD.getText().toString() + symb);
+                    }
                 }
             }
             else {
@@ -307,10 +390,24 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
             int brCount1 = s.split("\\(", -1).length - 1;
             int brCount2 = s.split("\\)", -1).length - 1;
             char c=s.charAt(s.length() - 1);
-            if ("+-*/%".indexOf(c) > -1) etLCD.setText(etLCD.getText().toString() + "(");
+            if ("+-*/√|".indexOf(c) > -1) etLCD.setText(etLCD.getText().toString() + "(");
             if (Character.isDigit(c)&&brCount1>brCount2) etLCD.setText(etLCD.getText().toString() + ")");
-            if (")!eπ".indexOf(c) > -1&&brCount1>brCount2) etLCD.setText(etLCD.getText().toString() + ")"); // дописати пі
+            if (")!eπ|".indexOf(c) > -1&&brCount1>brCount2) etLCD.setText(etLCD.getText().toString() + ")"); // дописати пі
             if (c=='(') etLCD.setText(etLCD.getText().toString() + "(");
+        }
+    }
+
+    private void ClickAbs(){
+        AddRes();
+        String s = etLCD.getText().toString();
+        if (s.equals(""))
+            etLCD.setText("|");
+        else {
+            int brCount1 = s.split("\\|", -1).length - 1;
+            char c=s.charAt(s.length() - 1);
+            if ("+-*/".indexOf(c) > -1) etLCD.setText(etLCD.getText().toString() + "|");
+            if (Character.isDigit(c)&&brCount1%2!=0) etLCD.setText(etLCD.getText().toString() + "|");
+            if (")!eπ".indexOf(c) > -1&&brCount1%2!=0) etLCD.setText(etLCD.getText().toString() + "|");
         }
     }
 
@@ -344,13 +441,13 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void ClickFunc(int f){
-        if (!(f==4||f==5)) AddRes();// замінити нумерацію
+        if (!(f==9||f==10||f==16)) AddRes();// замінити нумерацію
         String s = etLCD.getText().toString();
         char c='1';
         if (!s.equals("")){
             c=s.charAt(s.length() - 1);
         }
-        if (s.equals("")||("+-*/%".indexOf(c) > -1))
+        if (s.equals("")||("+-*/%(".indexOf(c) > -1))
         {
             switch(f) {
                 case 1:
@@ -362,7 +459,7 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
                     break;
 
                 case 3:
-                    etLCD.setText(etLCD.getText().toString() + "√");
+                    etLCD.setText(etLCD.getText().toString() + "√(");
                     break;
 
                 case 4:
@@ -378,12 +475,45 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
                     break;
 
                 case 7:
-                    etLCD.setText(etLCD.getText().toString() + "cos(");
+                    etLCD.setText(etLCD.getText().toString() + "ln(");
                     break;
 
                 case 8:
-                    etLCD.setText(etLCD.getText().toString() + "tan(");
+                    etLCD.setText(etLCD.getText().toString() + "lg(");
                     break;
+
+                case 11:
+                    etLCD.setText(etLCD.getText().toString() + "sec(");
+                    break;
+
+                case 12:
+                    etLCD.setText(etLCD.getText().toString() + "cosec(");
+                    break;
+
+                case 13:
+                    etLCD.setText(etLCD.getText().toString() + "sinh(");
+                    break;
+
+                case 14:
+                    etLCD.setText(etLCD.getText().toString() + "cosh(");
+                    break;
+
+                case 15:
+                    etLCD.setText(etLCD.getText().toString() + "tanh(");
+                    break;
+
+                case 17:
+                    etLCD.setText(etLCD.getText().toString() + "2^(");
+                    break;
+
+                case 18:
+                    etLCD.setText(etLCD.getText().toString() + "e^(");
+                    break;
+
+                case 19:
+                    etLCD.setText(etLCD.getText().toString() + "abs(");
+                    break;
+
 
             }
         }
@@ -398,9 +528,9 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
                     etLCD.setText(etLCD.getText().toString() + "^(");
                     break;
 
-                /*case :
+                case 16:
                     etLCD.setText(etLCD.getText().toString() + "!");
-                    break;*/
+                    break;
             }
         }
     }
@@ -423,7 +553,8 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
         String expression = etLCD.getText().toString();
         expression=FuncCorrect(expression);
         try{
-            double res =parser.Parse(expression);
+            double res =parser.Parse(expression, isRad());
+            res = (  (double)Math.round(res * 100000000000L)  ) / 100000000000L;
             long r = Math.round(res);
             if (r==res) {
                 saveFile(etLCD.getText().toString()+"="+Integer.toString((int) r));
@@ -435,7 +566,6 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
                 else {
                     String s=etLCD.getText().toString()+"=";
                     DecimalFormat df = new DecimalFormat("#.##########");
-                    df.setRoundingMode(RoundingMode.CEILING);
                     etLCD.setText(df.format(res).replace(',', '.'));
                     saveFile(s+etLCD.getText().toString());
                 }
@@ -478,6 +608,32 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
             }
             ident=ex.indexOf('!');
         }
+        ident=ex.indexOf('|');
+        int count=0;
+        /*while (ident > -1){
+           if (ident<ex.length()-1) {
+               c = ex.charAt(ident + 1);
+               if (Character.isDigit(c)||c=='(')
+                   ex = ex.substring(0, ident) + "abs(" + ex.substring(ident + 1);
+               else
+                   if (c=='-'&&count==0)
+                       ex = ex.substring(0, ident) + "abs(" + ex.substring(ident + 1);
+
+
+           }
+           else
+               ex=ex.substring(0, ident)+")"+ex.substring(ident+1);
+           ident=ex.indexOf('|');
+
+        }*/
+        while (ident > -1){
+            ex = ex.substring(0, ident) + "abs(" + ex.substring(ident + 1);
+            ident=ex.lastIndexOf('|');
+            ex = ex.substring(0, ident) + ")" + ex.substring(ident + 1);
+            ident=ex.indexOf('|');
+        }
+        /*Toast.makeText(getApplicationContext(),
+                ex, Toast.LENGTH_LONG).show();*/
         return ex;
     }
 

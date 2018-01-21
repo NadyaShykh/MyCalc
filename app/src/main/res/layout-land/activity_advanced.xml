@@ -22,8 +22,20 @@
                 android:id="@+id/infoTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:textSize="30sp" />
+                android:layout_marginBottom="5dp"
+                android:layout_weight="20"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/infoDegRad"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:text="Rad"
+                android:background="@color/colorLightGray"
+                android:layout_weight="1"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -40,7 +52,7 @@
                 android:layout_below="@id/infoTextView"
                 android:lines="3"
                 android:maxLines="3"
-                android:textSize="50sp" />
+                android:textSize="45sp" />
         </LinearLayout>
 
         <LinearLayout
