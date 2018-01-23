@@ -2,16 +2,12 @@ package com.example.nadya.mycalc;
 
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.widget.Toast;
-
-import com.example.nadya.mycalc.AdvancedActivity;
 import java.util.HashMap;
 
 /**
  * Метод рекурсивного спуску для інтерпретації математичних виразів.
- * Підтримуються математичні функції з 1 і 2 параметрами.
  */
-public class MathParser extends AdvancedActivity {
+public class MathParser {
 
     private static HashMap<String, Double> var;
     private static boolean isRad;
@@ -137,7 +133,6 @@ public class MathParser extends AdvancedActivity {
 
 
 
-
     private Result mulDiv(String s) throws Exception{
         Result cur = exponentiation(s);
         double acc = cur.acc;
@@ -161,12 +156,13 @@ public class MathParser extends AdvancedActivity {
                     break;
                 case '/':
                     acc/=right.acc;
+                    if (right.acc==0) throw new Exception("Division by 0!");
                     break;
                 case '%':
-                    acc%=right.acc;
-                    break;
-                case '\\': // целочисленное деление
-                    acc = (acc - acc % right.acc)/right.acc;
+                    if (right.acc!=0)
+                        acc%=right.acc;
+                    else
+                        throw new Exception("Division by 0!");
                     break;
             }
             cur = new Result(acc,right.rest);
@@ -212,31 +208,31 @@ public class MathParser extends AdvancedActivity {
     private Result functionVariable(String s) throws Exception{
         String f = "";
         int i = 0;
-        // ищем название функции или переменной
-        // имя обязательно должна начинаться с буквы
+        // шукаємо назву функції чи змінної
+        // назва має починатись з букви
         while (i < s.length() && (Character.isLetter(s.charAt(i)) ||
                 ( Character.isDigit(s.charAt(i)) && i > 0 ) )) {
             f += s.charAt(i);
             i++;
         }
-        if (!f.isEmpty()) { // если что-нибудь нашли
+        if (!f.isEmpty()) { // якщо знайдено
             if ( s.length() > i && s.charAt( i ) == '(') {
-                // и следующий символ скобка значит - это функция
+                // і наступний символ дужка - то це функція
                 Result r = binaryFunc(s.substring(f.length()+1));
 
                 if(!r.rest.isEmpty() && r.rest.charAt(0) == ','){
-                    // если функция с двумя параметрами
-                    double acc = r.acc;
+                    // якщо це функція з двома параметрами
+                   /*double acc = r.acc;
                     Result r2 = binaryFunc(r.rest.substring(1));
 
                     r2 = closeBracket(r2);
-                    return processFunction(f, acc,r2);
+                    return processFunction(f, acc,r2);*/
 
                 } else {
                     r = closeBracket(r);
                     return processFunction(f, r);
                 }
-            } else { // иначе - это переменная
+            } else { // інакше це змінна
                 return new Result(getVariable(f), s.substring(f.length()));
             }
         }
@@ -252,24 +248,18 @@ public class MathParser extends AdvancedActivity {
 
     private Result num(String s) throws Exception{
         int i = 0;
-        int dot_cnt = 0;
         boolean negative = false;
-        // число може починатись з мінуса
+        // число може починатись із -
         if( s.charAt(0) == '-' ){
             negative = true;
             s = s.substring( 1 );
         }
-        // дозволяємо тільки цифри і крапку
+        // дозволено лише цифри і крапка
         while (i < s.length() &&
                 (Character.isDigit(s.charAt(i)) || s.charAt(i) == '.')) {
-            // перевірка, щоб у числі була лише 1 крапка
-            if (s.charAt(i) == '.' && ++dot_cnt > 1) {
-                throw new Exception("not valid number '"
-                        + s.substring(0, i + 1) + "'");
-            }
             i++;
         }
-        if( i == 0 ){ // число не знайдене
+        if( i == 0 ){
             throw new Exception("can't get valid number in '" + s + "'" );
         }
 
@@ -299,20 +289,33 @@ public class MathParser extends AdvancedActivity {
                 return new Result(Math.tan(ang), r.rest);
             case "tanh": // гіперболічний тангенс
                 return new Result(Math.tanh(r.acc), r.rest);
-            case "ctg":
-                return new Result(1/Math.tan(ang), r.rest);
             case "sec": // секанс
-                return new Result(1/Math.cos(r.acc), r.rest);
+                if (Math.cos(ang)!=0)
+                    return new Result(1/Math.cos(ang), r.rest);
+                else
+                    throw new Exception("Argument of sec '" + Double.toString(r.acc) + "' is wrong!");
             case "cosec": // косеканс
-                return new Result(1/Math.sin(r.acc), r.rest);
+                if (Math.sin(ang)!=0)
+                    return new Result(1/Math.sin(ang), r.rest);
+                else
+                    throw new Exception("Argument of cosec '" + Double.toString(r.acc) + "' is wrong!");
             case "abs":
                 return new Result(Math.abs(r.acc), r.rest);
             case "ln":
-                return new Result(Math.log(r.acc), r.rest);
+                if (r.acc>0)
+                    return new Result(Math.log(r.acc), r.rest);
+                else
+                    throw new Exception("Argument of ln '" + Double.toString(r.acc) + "' is less or equal 0");
             case "lg": // десятковий логарифм
-                return new Result(Math.log10(r.acc), r.rest);
+                if (r.acc>0)
+                 return new Result(Math.log10(r.acc), r.rest);
+                else
+                    throw new Exception("Argument of lg '" + Double.toString(r.acc) + "' is less or equal 0");
             case "sqrt":
-                return new Result(Math.sqrt(r.acc), r.rest);
+                if (r.acc>=0)
+                    return new Result(Math.sqrt(r.acc), r.rest);
+                else
+                    throw new Exception("Argument of sqrt '" + Double.toString(r.acc) + "' is less than 0");
             case "fact":
                 long tr = Math.round(r.acc);
                 if (tr==r.acc && tr>-1)
@@ -323,7 +326,7 @@ public class MathParser extends AdvancedActivity {
                 throw new Exception("Function '" + func + "' is not defined");
         }
     }
-    private Result processFunction(String func,
+   /* private Result processFunction(String func,
                                    double acc,
                                    Result r) throws Exception{
         switch(func){
@@ -336,7 +339,7 @@ public class MathParser extends AdvancedActivity {
                 throw new Exception("Function '" + func +
                         "' is not defined");
         }
-    }
+    }*/
 
     public static double fact(double num) {
         if (num == 0||num == 1) return 1;

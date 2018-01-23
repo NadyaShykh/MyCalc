@@ -109,6 +109,11 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
                 Intent intent = new Intent(AdvancedActivity.this, HistoryActivity.class);
                 startActivity(intent);
                 return true;
+
+            case R.id.itemSet:
+                intent = new Intent(AdvancedActivity.this, PrefActivity.class);
+                startActivity(intent);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -118,6 +123,7 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
         super.onSaveInstanceState(outState);
         outState.putString("result", etLCD.getText().toString());
         outState.putString("memory", tvLCD.getText().toString());
+        outState.putString("angle", tvDegRad.getText().toString());
     }
 
     @Override
@@ -125,6 +131,7 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
         super.onRestoreInstanceState(savedInstanceState);
         etLCD.setText(savedInstanceState.getString("result"));
         tvLCD.setText(savedInstanceState.getString("memory"));
+        tvDegRad.setText(savedInstanceState.getString("angle"));
     }
 
     @Override
@@ -443,7 +450,7 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
     private void ClickFunc(int f){
         if (!(f==9||f==10||f==16)) AddRes();// замінити нумерацію
         String s = etLCD.getText().toString();
-        char c='1';
+        char c='&';
         if (!s.equals("")){
             c=s.charAt(s.length() - 1);
         }

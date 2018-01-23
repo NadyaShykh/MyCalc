@@ -62,7 +62,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
-                android:text="10^x"
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_10_x"
                 android:textSize="15sp"
                 app:layout_constraintTop_toBottomOf="@+id/editText" />
 
@@ -73,7 +74,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
-                android:text="C"
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_clean"
                 android:textSize="15sp"
                 app:layout_constraintTop_toBottomOf="@+id/editText" />
 
@@ -83,6 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@android:color/darker_gray"
                 android:text="@string/_back"
                 android:textSize="15sp"
                 app:layout_constraintTop_toBottomOf="@+id/editText" />
@@ -94,6 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
+                android:backgroundTint="@android:color/darker_gray"
                 android:text="@string/_mod"
                 android:textSize="15sp"
                 app:layout_constraintTop_toBottomOf="@+id/editText" />
@@ -105,6 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
+                android:backgroundTint="@android:color/darker_gray"
                 android:text="@string/_div"
                 android:textSize="15sp"
                 app:layout_constraintTop_toBottomOf="@+id/editText" />
@@ -125,6 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
+                android:backgroundTint="@android:color/darker_gray"
                 android:text="@string/_1_x"
                 android:textSize="15sp" />
 
@@ -134,6 +140,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorLightGray"
                 android:text="@string/_7"
                 android:textSize="15sp"
                 app:layout_constraintTop_toBottomOf="@+id/buttonClear" />
@@ -144,6 +151,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorLightGray"
                 android:text="@string/_8"
                 android:textSize="15sp"
                 app:layout_constraintStart_toEndOf="@+id/buttonSeven"
@@ -155,6 +163,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorLightGray"
                 android:text="@string/_9"
                 android:textSize="15sp"
                 app:layout_constraintStart_toEndOf="@+id/buttonEight"
@@ -166,6 +175,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@android:color/darker_gray"
                 android:text="@string/_mul"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -185,6 +195,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@android:color/darker_gray"
                 android:text="@string/_sqr"
                 android:textSize="15sp" />
 
@@ -194,6 +205,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorLightGray"
                 android:text="@string/_4"
                 android:textSize="15sp"
                 app:layout_constraintTop_toBottomOf="@+id/buttonSeven" />
@@ -204,6 +216,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorLightGray"
                 android:text="@string/_5"
                 android:textSize="15sp"
                 app:layout_constraintStart_toEndOf="@+id/buttonFour"
@@ -215,6 +228,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorLightGray"
                 android:text="@string/_6"
                 android:textSize="15sp"
                 app:layout_constraintStart_toEndOf="@+id/buttonFive"
@@ -226,6 +240,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@android:color/darker_gray"
                 android:text="@string/_add"
                 android:textSize="15sp"
                 app:layout_constraintStart_toEndOf="@+id/buttonSix"
@@ -245,6 +260,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@android:color/darker_gray"
                 android:text="@string/_sqrt"
                 android:textSize="15sp" />
 
@@ -254,6 +270,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorLightGray"
                 android:text="@string/_1"
                 android:textSize="15sp"
                 app:layout_constraintTop_toBottomOf="@+id/buttonFour" />
@@ -264,6 +281,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorLightGray"
                 android:text="@string/_2"
                 android:textSize="15sp"
                 app:layout_constraintStart_toEndOf="@+id/buttonOne"
@@ -275,6 +293,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorLightGray"
                 android:text="@string/_3"
                 android:textSize="15sp"
                 app:layout_constraintTop_toBottomOf="@+id/buttonFour" />
@@ -285,6 +304,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@android:color/darker_gray"
                 android:text="@string/_sub"
                 android:textSize="15sp"
                 app:layout_constraintTop_toBottomOf="@+id/buttonThree" />
@@ -303,6 +323,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@android:color/darker_gray"
                 android:text="@string/_fact"
                 android:textSize="15sp" />
 
@@ -312,6 +333,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorLightGray"
                 android:text="@string/_br"
                 android:textSize="15sp"
                 app:layout_constraintTop_toBottomOf="@+id/buttonOne" />
@@ -322,6 +344,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorLightGray"
                 android:text="@string/_0"
                 android:textSize="15sp"
                 app:layout_constraintStart_toEndOf="@+id/buttonBraces"
@@ -333,6 +356,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorLightGray"
                 android:text="@string/_dot"
                 android:textSize="15sp"
                 app:layout_constraintStart_toEndOf="@+id/buttonZero"
@@ -344,6 +368,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@android:color/holo_orange_dark"
                 android:text="@string/_eq"
                 android:textSize="15sp"
                 app:layout_constraintStart_toEndOf="@+id/buttonDot"

@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:gravity="center"
-                android:text="Rad"
+                android:text="@string/_raddeg"
                 android:background="@color/colorLightGray"
                 android:layout_weight="1"
                 android:textSize="20sp" />
@@ -67,8 +67,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="sin"
-                android:textSize="15sp"/>
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_sin"
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/buttonSinH"
@@ -76,8 +77,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="sinh"
-                android:textSize="15sp"/>
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_sh"
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/buttonAbs"
@@ -85,8 +87,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="|x|"
-                android:textSize="15sp"/>
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_abs"
+                android:textSize="15sp" />
 
 
             <Button
@@ -95,8 +98,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="C"
-                android:textSize="15sp"/>
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_clean"
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/buttonBack"
@@ -104,8 +108,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="←"
-                android:textSize="15sp"/>
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_back"
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/buttonExp"
@@ -113,8 +118,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="e"
-                android:textSize="15sp"/>
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_e"
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/buttonPi"
@@ -122,8 +128,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="π"
-                android:textSize="15sp"/>
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_pi"
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/buttonDivide"
@@ -131,8 +138,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="/"
-                android:textSize="15sp"/>
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_div"
+                android:textSize="15sp" />
 
 
         </LinearLayout>
@@ -149,7 +157,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="cos"
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_cos"
                 android:textSize="15sp" />
 
             <Button
@@ -158,7 +167,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="cosh"
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_ch"
                 android:textSize="15sp" />
 
             <Button
@@ -167,7 +177,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="√x"
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_sqrt"
                 android:textSize="15sp" />
 
             <Button
@@ -176,7 +187,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="1/x"
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_1_x"
                 android:textSize="15sp" />
 
             <Button
@@ -185,7 +197,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="7"
+                android:backgroundTint="@color/colorLightGray"
+                android:text="@string/_7"
                 android:textSize="15sp" />
 
             <Button
@@ -194,7 +207,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="8"
+                android:backgroundTint="@color/colorLightGray"
+                android:text="@string/_8"
                 android:textSize="15sp" />
 
             <Button
@@ -203,7 +217,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="9"
+                android:backgroundTint="@color/colorLightGray"
+                android:text="@string/_9"
                 android:textSize="15sp" />
 
 
@@ -213,7 +228,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="*"
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_mul"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -231,7 +247,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="tan"
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_tan"
                 android:textSize="15sp" />
 
             <Button
@@ -240,7 +257,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="tanh"
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_th"
                 android:textSize="15sp" />
 
             <Button
@@ -249,7 +267,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="х^2"
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_sqr"
                 android:textSize="15sp" />
 
             <Button
@@ -258,7 +277,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="2^x"
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_2_x"
                 android:textSize="15sp" />
 
             <Button
@@ -267,7 +287,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="4"
+                android:backgroundTint="@color/colorLightGray"
+                android:text="@string/_4"
                 android:textSize="15sp" />
 
             <Button
@@ -276,7 +297,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="5"
+                android:backgroundTint="@color/colorLightGray"
+                android:text="@string/_5"
                 android:textSize="15sp" />
 
             <Button
@@ -285,7 +307,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="6"
+                android:backgroundTint="@color/colorLightGray"
+                android:text="@string/_6"
                 android:textSize="15sp"
                 app:layout_constraintStart_toEndOf="@+id/buttonFive"
                 app:layout_constraintTop_toBottomOf="@+id/buttonSeven" />
@@ -296,7 +319,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="+"
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_add"
                 android:textSize="15sp" />
 
         </LinearLayout>
@@ -313,7 +337,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="sec"
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_sec"
                 android:textSize="15sp"
                 app:layout_constraintTop_toBottomOf="@+id/buttonClear" />
 
@@ -323,7 +348,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="ln"
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_ln"
                 android:textSize="15sp"
                 app:layout_constraintTop_toBottomOf="@+id/buttonClear" />
 
@@ -333,7 +359,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="x^y"
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_pow"
                 android:textSize="15sp" />
 
             <Button
@@ -342,7 +369,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="10^x"
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_10_x"
                 android:textSize="15sp" />
 
             <Button
@@ -351,7 +379,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="1"
+                android:backgroundTint="@color/colorLightGray"
+                android:text="@string/_1"
                 android:textSize="15sp" />
 
             <Button
@@ -360,7 +389,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="2"
+                android:backgroundTint="@color/colorLightGray"
+                android:text="@string/_2"
                 android:textSize="15sp" />
 
             <Button
@@ -369,7 +399,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="3"
+                android:backgroundTint="@color/colorLightGray"
+                android:text="@string/_3"
                 android:textSize="15sp" />
 
             <Button
@@ -378,7 +409,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="-"
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_sub"
                 android:textSize="15sp" />
 
         </LinearLayout>
@@ -395,7 +427,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="cosec"
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_cosec"
                 android:textSize="15sp"
                 app:layout_constraintTop_toBottomOf="@+id/buttonClear" />
 
@@ -405,7 +438,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="lg"
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_lg"
                 android:textSize="15sp" />
 
             <Button
@@ -414,6 +448,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@android:color/darker_gray"
                 android:text="@string/_fact"
                 android:textSize="15sp" />
 
@@ -423,7 +458,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="e^x"
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_e_x"
                 android:textSize="15sp" />
 
             <Button
@@ -432,7 +468,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="( )"
+                android:backgroundTint="@color/colorLightGray"
+                android:text="@string/_br"
                 android:textSize="15sp" />
 
             <Button
@@ -441,7 +478,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="0"
+                android:backgroundTint="@color/colorLightGray"
+                android:text="@string/_0"
                 android:textSize="15sp" />
 
             <Button
@@ -450,7 +488,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="."
+                android:backgroundTint="@color/colorLightGray"
+                android:text="@string/_dot"
                 android:textSize="15sp" />
 
             <Button
@@ -459,7 +498,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="="
+                android:backgroundTint="@android:color/holo_orange_dark"
+                android:text="@string/_eq"
                 android:textSize="15sp" />
         </LinearLayout>
 

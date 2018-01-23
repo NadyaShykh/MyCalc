@@ -29,6 +29,10 @@
             android:name=".HistoryActivity"
             android:label="@string/title_activity_history"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".PrefActivity"
+            android:label="Settings"
+            />
     </application>
 
 </manifest>

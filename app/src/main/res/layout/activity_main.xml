@@ -56,6 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
+                android:backgroundTint="@android:color/darker_gray"
                 android:text="@string/_clean"
                 android:textSize="20sp"
                 app:layout_constraintTop_toBottomOf="@+id/editText" />
@@ -66,6 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@android:color/darker_gray"
                 android:text="@string/_back"
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@+id/buttonClear"
@@ -78,6 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
+                android:backgroundTint="@android:color/darker_gray"
                 android:text="@string/_mod"
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@+id/buttonBack"
@@ -90,6 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
+                android:backgroundTint="@android:color/darker_gray"
                 android:text="@string/_div"
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@+id/buttonDivide"
@@ -109,6 +113,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorLightGray"
                 android:text="@string/_7"
                 android:textSize="20sp"
                 app:layout_constraintTop_toBottomOf="@+id/buttonClear" />
@@ -119,7 +124,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="8"
+                android:backgroundTint="@color/colorLightGray"
+                android:text="@string/_8"
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@+id/buttonSeven"
                 app:layout_constraintTop_toBottomOf="@+id/buttonClear" />
@@ -130,7 +136,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="9"
+                android:backgroundTint="@color/colorLightGray"
+                android:text="@string/_9"
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@+id/buttonEight"
                 app:layout_constraintTop_toBottomOf="@+id/buttonClear" />
@@ -141,7 +148,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="*"
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_mul"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/buttonClear" />
@@ -160,6 +168,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorLightGray"
                 android:text="@string/_4"
                 android:textSize="20sp"
                 app:layout_constraintTop_toBottomOf="@+id/buttonSeven" />
@@ -170,7 +179,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="5"
+                android:backgroundTint="@color/colorLightGray"
+                android:text="@string/_5"
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@+id/buttonFour"
                 app:layout_constraintTop_toBottomOf="@+id/buttonSeven" />
@@ -181,7 +191,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="6"
+                android:backgroundTint="@color/colorLightGray"
+                android:text="@string/_6"
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@+id/buttonFive"
                 app:layout_constraintTop_toBottomOf="@+id/buttonSeven" />
@@ -192,7 +203,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="+"
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_add"
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@+id/buttonSix"
                 app:layout_constraintTop_toBottomOf="@+id/buttonSeven" />
@@ -211,9 +223,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorLightGray"
                 android:text="@string/_1"
-                android:textSize="20sp"
-                app:layout_constraintTop_toBottomOf="@+id/buttonFour" />
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/buttonTwo"
@@ -221,10 +233,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorLightGray"
                 android:text="@string/_2"
-                android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@+id/buttonOne"
-                app:layout_constraintTop_toBottomOf="@+id/buttonFour" />
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/buttonThree"
@@ -232,10 +243,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorLightGray"
                 android:text="@string/_3"
-                android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@+id/buttonTwo"
-                app:layout_constraintTop_toBottomOf="@+id/buttonFour" />
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/buttonSubstract"
@@ -243,10 +253,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="-"
-                android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@+id/buttonTwo"
-                app:layout_constraintTop_toBottomOf="@+id/buttonThree" />
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="@string/_sub"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -260,45 +269,42 @@
             <Button
                 android:id="@+id/buttonBraces"
                 style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="( )"
-                android:textSize="20sp"
-                app:layout_constraintTop_toBottomOf="@+id/buttonOne" />
+                android:backgroundTint="@color/colorLightGray"
+                android:text="@string/_br"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/buttonZero"
                 style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorLightGray"
                 android:text="@string/_0"
-                android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@+id/buttonBraces"
-                app:layout_constraintTop_toBottomOf="@+id/buttonOne" />
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/buttonDot"
                 style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="."
-                android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@+id/buttonZero"
-                app:layout_constraintTop_toBottomOf="@+id/buttonOne" />
+                android:backgroundTint="@color/colorLightGray"
+                android:text="@string/_dot"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/buttonEqual"
                 style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="="
-                android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@+id/buttonDot"
-                app:layout_constraintTop_toBottomOf="@+id/buttonSubtract" />
+                android:backgroundTint="@android:color/holo_orange_dark"
+                android:text="@string/_eq"
+                android:textSize="20sp" />
         </LinearLayout>
 
     </LinearLayout>

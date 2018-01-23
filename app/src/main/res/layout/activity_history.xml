@@ -37,7 +37,6 @@
         android:layout_below="@+id/toolbar"
 
         android:inputType="textMultiLine"
-        android:text="123"
         android:textSize="40sp"
         tools:layout_editor_absoluteY="62dp" />
 

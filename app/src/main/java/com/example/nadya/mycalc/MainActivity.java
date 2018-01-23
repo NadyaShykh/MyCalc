@@ -1,7 +1,9 @@
 package com.example.nadya.mycalc;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -30,6 +32,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     TextView tvLCD;
     public TextView etLCD;
     boolean isRes;
+    SharedPreferences sp;
+    Boolean correct;
+    String style_calc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +77,16 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         etLCD = (TextView) findViewById(R.id.editText);
 
         tvLCD.setOnClickListener(this);
+
+        sp = PreferenceManager.getDefaultSharedPreferences(this);
     }
+
+    protected void onResume() {
+        correct = sp.getBoolean("corr", true);
+        //style_calc = sp.getString("style_calc", "1");
+        super.onResume();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -93,7 +107,12 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 intent = new Intent(MainActivity.this, HistoryActivity.class);
                 startActivity(intent);
                 return true;
-            //дописати решту
+
+            case R.id.itemSet:
+                intent = new Intent(MainActivity.this, PrefActivity.class);
+                startActivity(intent);
+                return true;
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -325,7 +344,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     private void ClickFunc(int f){
         if (!(f==4||f==5)) AddRes();
         String s = etLCD.getText().toString();
-        char c='1';
+        char c='&';
         if (!s.equals("")){
             c=s.charAt(s.length() - 1);
         }

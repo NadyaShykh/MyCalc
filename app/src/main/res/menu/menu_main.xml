@@ -15,7 +15,7 @@
             app:showAsAction="never">
         </item>
         <item
-            android:id="@+id/itemTheme"
+            android:id="@+id/itemSet"
             android:title="@string/item2"
             app:showAsAction="never">
         </item>

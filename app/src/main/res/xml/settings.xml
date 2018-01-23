@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.nadya.mycalc.PrefActivity"
+    android:title="Settings">
+
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="corr"
+        android:summary="Close braces and correct expression"
+        android:title="Autocorrection" />
+
+    <ListPreference
+        android:key="app_style"
+        android:title="Theme"
+        android:summary="Set application style"
+        android:defaultValue="1"
+        android:entries="@array/app_style"
+        android:entryValues="@array/app_style"
+        android:dialogTitle="Choose style"/>
+
+
+</PreferenceScreen>
