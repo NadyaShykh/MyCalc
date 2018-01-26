@@ -1,6 +1,9 @@
 package com.example.nadya.mycalc;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -17,13 +20,23 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.lang.reflect.Method;
 
 public class HistoryActivity extends AppCompatActivity {
 
     TextView tvHist;
+    SharedPreferences sp;
+    String style_calc;
+    static String themeId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sp = PreferenceManager.getDefaultSharedPreferences(this);
+        style_calc = sp.getString("app_style", "Ligth");
+        if (style_calc.equals("Ligth"))
+            setTheme(R.style.AppTheme_NoActionBar);
+        else
+            setTheme(R.style.CustomTheme_NoActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -43,6 +56,31 @@ public class HistoryActivity extends AppCompatActivity {
         tvHist = (TextView) findViewById(R.id.histTextView);
         tvHist.setMovementMethod(new ScrollingMovementMethod());
         openFile();
+    }
+
+    @Override
+    protected void onResume() {
+        sp = PreferenceManager.getDefaultSharedPreferences(this);
+        style_calc = sp.getString("app_style", "Ligth");
+        if (style_calc.equals("Ligth"))
+            themeId="2131689480";
+        else
+            themeId="2131689646";
+        if (!Integer.toString(getThemeId()).equals(themeId))
+            Utils.changeToTheme(this, Utils.THEME_LIGTH);
+        super.onResume();
+    }
+
+    int getThemeId() {
+        try {
+            Class<?> wrapper = Context.class;
+            Method method = wrapper.getMethod("getThemeResId");
+            method.setAccessible(true);
+            return (Integer) method.invoke(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     @Override

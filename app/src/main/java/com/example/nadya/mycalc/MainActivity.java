@@ -1,8 +1,10 @@
 package com.example.nadya.mycalc;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.view.View.OnClickListener;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.lang.reflect.Method;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import android.view.Menu;
@@ -35,9 +38,18 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     SharedPreferences sp;
     Boolean correct;
     String style_calc;
+    static String themeId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sp = PreferenceManager.getDefaultSharedPreferences(this);
+        correct = sp.getBoolean("corr", true);
+        style_calc = sp.getString("app_style", "Ligth");
+        if (style_calc.equals("Ligth"))
+            setTheme(R.style.AppTheme);
+        else
+            setTheme(R.style.CustomTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         isRes=false;
@@ -78,13 +90,34 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
         tvLCD.setOnClickListener(this);
 
-        sp = PreferenceManager.getDefaultSharedPreferences(this);
     }
 
+
+
+    @Override
     protected void onResume() {
+        sp = PreferenceManager.getDefaultSharedPreferences(this);
         correct = sp.getBoolean("corr", true);
-        //style_calc = sp.getString("style_calc", "1");
+        style_calc = sp.getString("app_style", "Ligth");
+        if (style_calc.equals("Ligth"))
+           themeId="2131689478";
+        else
+           themeId="2131689645";
+        if (!Integer.toString(getThemeId()).equals(themeId))
+            Utils.changeToTheme(this, Utils.THEME_LIGTH);
         super.onResume();
+    }
+
+    int getThemeId() {
+        try {
+            Class<?> wrapper = Context.class;
+            Method method = wrapper.getMethod("getThemeResId");
+            method.setAccessible(true);
+            return (Integer) method.invoke(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     @Override
@@ -222,7 +255,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             case R.id.infoTextView:
                 String s = etLCD.getText().toString();
                 char c = s.charAt(s.length() - 1);
-                if ("+-*/%".indexOf(c) > -1)
+                if ("+-*/%(".indexOf(c) > -1)
                     etLCD.setText(etLCD.getText().toString()+tvLCD.getText().toString());
                 else
                     etLCD.setText(tvLCD.getText().toString());

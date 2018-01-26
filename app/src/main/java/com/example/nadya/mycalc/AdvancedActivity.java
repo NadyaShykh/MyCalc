@@ -1,7 +1,10 @@
 package com.example.nadya.mycalc;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,6 +20,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.lang.reflect.Method;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
@@ -29,10 +33,20 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
 
     TextView tvLCD, etLCD, tvDegRad;
     boolean isRes;
-
+    SharedPreferences sp;
+    Boolean correct;
+    String style_calc;
+    static String themeId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sp = PreferenceManager.getDefaultSharedPreferences(this);
+        correct = sp.getBoolean("corr", true);
+        style_calc = sp.getString("app_style", "Ligth");
+        if (style_calc.equals("Ligth"))
+            setTheme(R.style.AppTheme);
+        else
+            setTheme(R.style.CustomTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_advanced);
         isRes=false;
@@ -87,6 +101,32 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
 
         tvLCD.setOnClickListener(this);
         tvDegRad.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        sp = PreferenceManager.getDefaultSharedPreferences(this);
+        correct = sp.getBoolean("corr", true);
+        style_calc = sp.getString("app_style", "Ligth");
+        if (style_calc.equals("Ligth"))
+            themeId="2131689478";
+        else
+            themeId="2131689645";
+        if (!Integer.toString(getThemeId()).equals(themeId))
+            Utils.changeToTheme(this, Utils.THEME_LIGTH);
+        super.onResume();
+    }
+
+    int getThemeId() {
+        try {
+            Class<?> wrapper = Context.class;
+            Method method = wrapper.getMethod("getThemeResId");
+            method.setAccessible(true);
+            return (Integer) method.invoke(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     @Override
@@ -220,7 +260,7 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
             case R.id.infoTextView:
                 String s = etLCD.getText().toString();
                 char c = s.charAt(s.length() - 1);
-                if ("+-*/%".indexOf(c) > -1)
+                if ("+-*/%(".indexOf(c) > -1)
                     etLCD.setText(etLCD.getText().toString()+tvLCD.getText().toString());
                 else
                     etLCD.setText(tvLCD.getText().toString());

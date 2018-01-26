@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="app_style">
-        <item>Ligth</item>
-        <item>Dark</item>
+        <item name="1">Ligth</item>
+        <item name="2">Dark</item>
     </string-array>
 </resources>
