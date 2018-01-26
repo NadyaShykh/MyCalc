@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -55,7 +56,8 @@ public class HistoryActivity extends AppCompatActivity {
 
         tvHist = (TextView) findViewById(R.id.histTextView);
         tvHist.setMovementMethod(new ScrollingMovementMethod());
-        openFile();
+        File f = new File(getFilesDir() + "/hist.txt");
+        if (f.exists()) openFile();
     }
 
     @Override
@@ -66,21 +68,9 @@ public class HistoryActivity extends AppCompatActivity {
             themeId="2131689480";
         else
             themeId="2131689646";
-        if (!Integer.toString(getThemeId()).equals(themeId))
+        if (!Integer.toString(Utils.getThemeId(this)).equals(themeId))
             Utils.changeToTheme(this, Utils.THEME_LIGTH);
         super.onResume();
-    }
-
-    int getThemeId() {
-        try {
-            Class<?> wrapper = Context.class;
-            Method method = wrapper.getMethod("getThemeResId");
-            method.setAccessible(true);
-            return (Integer) method.invoke(this);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return 0;
     }
 
     @Override

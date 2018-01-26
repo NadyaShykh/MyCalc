@@ -112,21 +112,9 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
             themeId="2131689478";
         else
             themeId="2131689645";
-        if (!Integer.toString(getThemeId()).equals(themeId))
+        if (!Integer.toString(Utils.getThemeId(this)).equals(themeId))
             Utils.changeToTheme(this, Utils.THEME_LIGTH);
         super.onResume();
-    }
-
-    int getThemeId() {
-        try {
-            Class<?> wrapper = Context.class;
-            Method method = wrapper.getMethod("getThemeResId");
-            method.setAccessible(true);
-            return (Integer) method.invoke(this);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return 0;
     }
 
     @Override
@@ -143,7 +131,6 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
             case R.id.itemAdv:
                 finish();
                 return true;
-            //дописати решту
 
             case R.id.itemHist:
                 Intent intent = new Intent(AdvancedActivity.this, HistoryActivity.class);
@@ -226,7 +213,7 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.buttonDivide:
-                ClickSymb('/');
+                ClickSymb('÷');
                 break;
 
             case R.id.buttonMultiply:
@@ -260,7 +247,7 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
             case R.id.infoTextView:
                 String s = etLCD.getText().toString();
                 char c = s.charAt(s.length() - 1);
-                if ("+-*/%(".indexOf(c) > -1)
+                if ("+-*÷%(".indexOf(c) > -1)
                     etLCD.setText(etLCD.getText().toString()+tvLCD.getText().toString());
                 else
                     etLCD.setText(tvLCD.getText().toString());
@@ -397,7 +384,7 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
         else
         {
             c = s.charAt(s.length() - 1);
-            if ("+-*/%".indexOf(symb) > -1) // вивід знаку операції, тут включити факторіал, e, pi
+            if ("+-*÷%".indexOf(symb) > -1) // вивід знаку операції, тут включити факторіал, e, pi
             {
                 if (Character.isDigit(c)||c=='!'||c=='e'||c=='π')
                     etLCD.setText(etLCD.getText().toString() + symb);
@@ -407,14 +394,6 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
                         etLCD.setText(etLCD.getText().toString() + symb);
                     if (")".indexOf(c) > -1)
                         etLCD.setText(etLCD.getText().toString() + symb);
-
-                    if ("|".indexOf(c) > -1) {
-                        int brCount1 = s.split("\\|", -1).length - 1;
-                        if (brCount1%2==0)
-                            etLCD.setText(etLCD.getText().toString() + symb);
-                        else
-                            if (symb == '-') etLCD.setText(etLCD.getText().toString() + symb);
-                    }
                 }
             }
             else {
@@ -437,26 +416,13 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
             int brCount1 = s.split("\\(", -1).length - 1;
             int brCount2 = s.split("\\)", -1).length - 1;
             char c=s.charAt(s.length() - 1);
-            if ("+-*/√|".indexOf(c) > -1) etLCD.setText(etLCD.getText().toString() + "(");
+            if ("+-*÷√".indexOf(c) > -1) etLCD.setText(etLCD.getText().toString() + "(");
             if (Character.isDigit(c)&&brCount1>brCount2) etLCD.setText(etLCD.getText().toString() + ")");
-            if (")!eπ|".indexOf(c) > -1&&brCount1>brCount2) etLCD.setText(etLCD.getText().toString() + ")"); // дописати пі
+            if (")!eπ".indexOf(c) > -1&&brCount1>brCount2) etLCD.setText(etLCD.getText().toString() + ")"); // дописати пі
             if (c=='(') etLCD.setText(etLCD.getText().toString() + "(");
         }
     }
 
-    private void ClickAbs(){
-        AddRes();
-        String s = etLCD.getText().toString();
-        if (s.equals(""))
-            etLCD.setText("|");
-        else {
-            int brCount1 = s.split("\\|", -1).length - 1;
-            char c=s.charAt(s.length() - 1);
-            if ("+-*/".indexOf(c) > -1) etLCD.setText(etLCD.getText().toString() + "|");
-            if (Character.isDigit(c)&&brCount1%2!=0) etLCD.setText(etLCD.getText().toString() + "|");
-            if (")!eπ".indexOf(c) > -1&&brCount1%2!=0) etLCD.setText(etLCD.getText().toString() + "|");
-        }
-    }
 
     private void ClickDot(){
         String s = etLCD.getText().toString();
@@ -478,7 +444,7 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
                     else
                     {
                         if ((s.lastIndexOf('+')>s.lastIndexOf('.'))||(s.lastIndexOf('-')>s.lastIndexOf('.'))
-                                ||(s.lastIndexOf('*')>s.lastIndexOf('.'))||(s.lastIndexOf('/')>s.lastIndexOf('.'))
+                                ||(s.lastIndexOf('*')>s.lastIndexOf('.'))||(s.lastIndexOf('÷')>s.lastIndexOf('.'))
                                 ||(s.lastIndexOf('%')>s.lastIndexOf('.')))
                             etLCD.setText(etLCD.getText().toString() + ".");
                     }
@@ -494,7 +460,7 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
         if (!s.equals("")){
             c=s.charAt(s.length() - 1);
         }
-        if (s.equals("")||("+-*/%(".indexOf(c) > -1))
+        if (s.equals("")||("+-*÷%(".indexOf(c) > -1))
         {
             switch(f) {
                 case 1:
@@ -596,9 +562,10 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
 
 
     private void Calculate(){
+        if (correct)  etLCD.setText(Utils.autoCorrection(etLCD.getText().toString()));
         MathParser parser = new MathParser();
         String expression = etLCD.getText().toString();
-        expression=FuncCorrect(expression);
+        expression=Utils.funcCorrect(expression);
         try{
             double res =parser.Parse(expression, isRad());
             res = (  (double)Math.round(res * 100000000000L)  ) / 100000000000L;
@@ -625,7 +592,8 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-    private String FuncCorrect(String ex) {
+    /*private String FuncCorrect(String ex) {
+        ex=ex.replaceAll("÷","/");
         ex=ex.replaceAll("√","sqrt");
         ex=ex.replaceAll("π","pi");
         char c='1';
@@ -633,7 +601,7 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
         while (ident > -1){
             String tmp=ex.substring(0,ident);
             c=tmp.charAt(tmp.length() - 1);
-            ex=removeCharAt(ex, ident);
+            ex=Utils.removeCharAt(ex, ident);
             if (c==')')
             {
                 ind=tmp.lastIndexOf('(');
@@ -655,38 +623,8 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
             }
             ident=ex.indexOf('!');
         }
-        ident=ex.indexOf('|');
-        int count=0;
-        /*while (ident > -1){
-           if (ident<ex.length()-1) {
-               c = ex.charAt(ident + 1);
-               if (Character.isDigit(c)||c=='(')
-                   ex = ex.substring(0, ident) + "abs(" + ex.substring(ident + 1);
-               else
-                   if (c=='-'&&count==0)
-                       ex = ex.substring(0, ident) + "abs(" + ex.substring(ident + 1);
-
-
-           }
-           else
-               ex=ex.substring(0, ident)+")"+ex.substring(ident+1);
-           ident=ex.indexOf('|');
-
-        }*/
-        while (ident > -1){
-            ex = ex.substring(0, ident) + "abs(" + ex.substring(ident + 1);
-            ident=ex.lastIndexOf('|');
-            ex = ex.substring(0, ident) + ")" + ex.substring(ident + 1);
-            ident=ex.indexOf('|');
-        }
-        /*Toast.makeText(getApplicationContext(),
-                ex, Toast.LENGTH_LONG).show();*/
         return ex;
-    }
-
-    private String removeCharAt(String s, int pos) {
-        return s.substring(0, pos) + s.substring(pos + 1); // Возвращаем подстроку s, которая начиная с нулевой позиции переданной строки (0) и заканчивается позицией символа (pos), который мы хотим удалить, соединенную с другой подстрокой s, которая начинается со следующей позиции после позиции символа (pos + 1), который мы удаляем, и заканчивается последней позицией переданной строки.
-    }
+    }*/
 
     private void saveFile(String text) {
         try {

@@ -12,7 +12,7 @@
         android:key="app_style"
         android:title="Theme"
         android:summary="Set application style"
-        android:defaultValue="1"
+        android:defaultValue="Ligth"
         android:entries="@array/app_style"
         android:entryValues="@array/app_style"
         android:dialogTitle="Choose style"/>

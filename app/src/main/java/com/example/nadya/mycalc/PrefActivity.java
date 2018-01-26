@@ -48,12 +48,12 @@ public class PrefActivity extends PreferenceActivity implements OnSharedPreferen
             themeId="2131689478";
         else
             themeId="2131689645";
-        if (!Integer.toString(getThemeId()).equals(themeId))
+        if (!Integer.toString(Utils.getThemeId(this)).equals(themeId))
             Utils.changeToTheme(PrefActivity.this, Utils.THEME_LIGTH);
     }
 
 
-    int getThemeId() {
+    /*int getThemeId() {
         try {
             Class<?> wrapper = Context.class;
             Method method = wrapper.getMethod("getThemeResId");
@@ -63,6 +63,6 @@ public class PrefActivity extends PreferenceActivity implements OnSharedPreferen
             e.printStackTrace();
         }
         return 0;
-    }
+    }*/
 
 }

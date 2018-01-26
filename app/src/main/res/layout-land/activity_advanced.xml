@@ -16,7 +16,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="10">
+            android:layout_weight="5">
 
             <TextView
                 android:id="@+id/infoTextView"
@@ -31,10 +31,10 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:background="@android:color/darker_gray"
                 android:gravity="center"
                 android:text="@string/_raddeg"
-                android:background="@color/colorLightGray"
-                android:layout_weight="1"
                 android:textSize="18sp" />
 
         </LinearLayout>

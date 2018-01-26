@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,7 +15,6 @@ import android.view.View.OnClickListener;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.lang.reflect.Method;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import android.view.Menu;
@@ -93,7 +91,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     }
 
 
-
     @Override
     protected void onResume() {
         sp = PreferenceManager.getDefaultSharedPreferences(this);
@@ -103,22 +100,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
            themeId="2131689478";
         else
            themeId="2131689645";
-        if (!Integer.toString(getThemeId()).equals(themeId))
+        if (!Integer.toString(Utils.getThemeId(this)).equals(themeId))
             Utils.changeToTheme(this, Utils.THEME_LIGTH);
         super.onResume();
     }
 
-    int getThemeId() {
-        try {
-            Class<?> wrapper = Context.class;
-            Method method = wrapper.getMethod("getThemeResId");
-            method.setAccessible(true);
-            return (Integer) method.invoke(this);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -217,7 +203,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 break;
 
             case R.id.buttonDivide:
-                ClickSymb('/');
+                ClickSymb('÷');
                 break;
 
             case R.id.buttonMultiply:
@@ -255,7 +241,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             case R.id.infoTextView:
                 String s = etLCD.getText().toString();
                 char c = s.charAt(s.length() - 1);
-                if ("+-*/%(".indexOf(c) > -1)
+                if ("+-*÷%(".indexOf(c) > -1)
                     etLCD.setText(etLCD.getText().toString()+tvLCD.getText().toString());
                 else
                     etLCD.setText(tvLCD.getText().toString());
@@ -312,7 +298,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         else
         {
             c = s.charAt(s.length() - 1);
-            if ("+-*/%".indexOf(symb) > -1) // вивід знаку операції, тут включити факторіал
+            if ("+-*÷%".indexOf(symb) > -1) // вивід знаку операції, тут включити факторіал
             {
                 if (Character.isDigit(c)||c=='!')
                     etLCD.setText(etLCD.getText().toString() + symb);
@@ -337,7 +323,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             int brCount1 = s.split("\\(", -1).length - 1;
             int brCount2 = s.split("\\)", -1).length - 1;
             char c=s.charAt(s.length() - 1);
-            if ("+-*/%√".indexOf(c) > -1) etLCD.setText(etLCD.getText().toString() + "(");
+            if ("+-*÷%√".indexOf(c) > -1) etLCD.setText(etLCD.getText().toString() + "(");
             if (Character.isDigit(c)&&brCount1>brCount2) etLCD.setText(etLCD.getText().toString() + ")");
             if (c==')'&&brCount1>brCount2) etLCD.setText(etLCD.getText().toString() + ")");
             if (c=='(') etLCD.setText(etLCD.getText().toString() + "(");
@@ -365,7 +351,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                     else
                     {
                         if ((s.lastIndexOf('+')>s.lastIndexOf('.'))||(s.lastIndexOf('-')>s.lastIndexOf('.'))
-                                ||(s.lastIndexOf('*')>s.lastIndexOf('.'))||(s.lastIndexOf('/')>s.lastIndexOf('.'))
+                                ||(s.lastIndexOf('*')>s.lastIndexOf('.'))||(s.lastIndexOf('÷')>s.lastIndexOf('.'))
                                 ||(s.lastIndexOf('%')>s.lastIndexOf('.')))
                             etLCD.setText(etLCD.getText().toString() + ".");
                     }
@@ -381,7 +367,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         if (!s.equals("")){
             c=s.charAt(s.length() - 1);
         }
-        if (s.equals("")||("+-*/%(".indexOf(c) > -1))
+        if (s.equals("")||("+-*÷%(".indexOf(c) > -1))
         {
             switch(f) {
                 case 1:
@@ -426,9 +412,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
 
     private void Calculate(){
+        if (correct)  etLCD.setText(Utils.autoCorrection(etLCD.getText().toString()));
         MathParser parser = new MathParser();
         String expression = etLCD.getText().toString();
-        expression=FuncCorrect(expression);
+        expression=Utils.funcCorrect(expression);
             try{
                 double res =parser.Parse(expression, true);
                 long r = Math.round(res);
@@ -455,42 +442,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
     }
 
-    private String FuncCorrect(String ex) {
-        ex=ex.replaceAll("√","sqrt");
-
-        char c='1';
-        int ind, ident=ex.indexOf('!');
-        while (ident > -1){
-            String tmp=ex.substring(0,ident);
-            c=tmp.charAt(tmp.length() - 1);
-            ex=removeCharAt(ex, ident);
-            if (c==')')
-            {
-                ind=tmp.lastIndexOf('(');
-                ex=ex.substring(0, ind)+"fact"+ex.substring(ind);
-            }
-            else
-            {
-                ind=0;
-                for (int i=tmp.length()-1; i>=0; i--){
-                    if (!Character.isDigit(tmp.charAt(i)))
-                        {
-                            if (tmp.charAt(i)!='.')
-                                ind=i+1;
-                                break;
-                        }
-                }
-                ex=ex.substring(0, ident)+")"+ex.substring(ident);
-                ex=ex.substring(0, ind)+"fact("+ex.substring(ind);
-            }
-            ident=ex.indexOf('!');
-        }
-        return ex;
-    }
-
-    private String removeCharAt(String s, int pos) {
-        return s.substring(0, pos) + s.substring(pos + 1); // Возвращаем подстроку s, которая начиная с нулевой позиции переданной строки (0) и заканчивается позицией символа (pos), который мы хотим удалить, соединенную с другой подстрокой s, которая начинается со следующей позиции после позиции символа (pos + 1), который мы удаляем, и заканчивается последней позицией переданной строки.
-    }
 
     private void saveFile(String text) {
         try {
@@ -499,7 +450,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             if (f.exists())
                 line=readFile();
             line="\n"+text+"\n"+line;
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(openFileOutput("hist.txt", MODE_WORLD_READABLE)));
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(openFileOutput("hist.txt", Context.MODE_WORLD_READABLE)));
             bw.write(line);
             bw.flush();
             bw.close();
@@ -532,4 +483,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         }
         return "";
     }
+
+
 }
