@@ -315,7 +315,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     }
 
     private void ClickBr(){
-        AddRes();
+        addRes();
         String s = etLCD.getText().toString();
         if (s.equals(""))
             etLCD.setText("(");
@@ -361,7 +361,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     }
 
     private void ClickFunc(int f){
-        if (!(f==4||f==5)) AddRes();
+        if (!(f==4||f==5)) addRes();
         String s = etLCD.getText().toString();
         char c='&';
         if (!s.equals("")){
@@ -398,7 +398,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         }
     }
 
-    private void AddRes(){
+    private void addRes(){
         if (isRes) {
             if (etLCD.getText().toString().equals("Infinity")||etLCD.getText().toString().equals("NaN"))
                 etLCD.setText("");

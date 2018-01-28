@@ -208,7 +208,7 @@ public class MathParser {
     private Result functionVariable(String s) throws Exception{
         String f = "";
         int i = 0;
-        // шукаємо назву функції чи змінної
+        // шукаємо назву функції
         // назва має починатись з букви
         while (i < s.length() && (Character.isLetter(s.charAt(i)) ||
                 ( Character.isDigit(s.charAt(i)) && i > 0 ) )) {
@@ -221,18 +221,12 @@ public class MathParser {
                 Result r = binaryFunc(s.substring(f.length()+1));
 
                 if(!r.rest.isEmpty() && r.rest.charAt(0) == ','){
-                    // якщо це функція з двома параметрами
-                   /*double acc = r.acc;
-                    Result r2 = binaryFunc(r.rest.substring(1));
-
-                    r2 = closeBracket(r2);
-                    return processFunction(f, acc,r2);*/
 
                 } else {
                     r = closeBracket(r);
                     return processFunction(f, r);
                 }
-            } else { // інакше це змінна
+            } else {
                 return new Result(getVariable(f), s.substring(f.length()));
             }
         }
@@ -254,7 +248,6 @@ public class MathParser {
             negative = true;
             s = s.substring( 1 );
         }
-        // дозволено лише цифри і крапка
         while (i < s.length() &&
                 (Character.isDigit(s.charAt(i)) || s.charAt(i) == '.')) {
             i++;
@@ -326,20 +319,7 @@ public class MathParser {
                 throw new Exception("Function '" + func + "' is not defined");
         }
     }
-   /* private Result processFunction(String func,
-                                   double acc,
-                                   Result r) throws Exception{
-        switch(func){
-            case "log": // логарифм x по основі y
-                return new Result(Math.log(acc)/Math.log(r.acc),
-                        r.rest);
-            case "xor": // виняток або
-                return new Result((int)acc ^ (int)r.acc,r.rest);
-            default:
-                throw new Exception("Function '" + func +
-                        "' is not defined");
-        }
-    }*/
+
 
     public static double fact(double num) {
         if (num == 0||num == 1) return 1;

@@ -53,16 +53,4 @@ public class PrefActivity extends PreferenceActivity implements OnSharedPreferen
     }
 
 
-    /*int getThemeId() {
-        try {
-            Class<?> wrapper = Context.class;
-            Method method = wrapper.getMethod("getThemeResId");
-            method.setAccessible(true);
-            return (Integer) method.invoke(this);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }*/
-
 }

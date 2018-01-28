@@ -408,7 +408,7 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void ClickBr(){
-        AddRes();
+        addRes();
         String s = etLCD.getText().toString();
         if (s.equals(""))
             etLCD.setText("(");
@@ -454,7 +454,7 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void ClickFunc(int f){
-        if (!(f==9||f==10||f==16)) AddRes();// замінити нумерацію
+        if (!(f==9||f==10||f==16)) addRes();// замінити нумерацію
         String s = etLCD.getText().toString();
         char c='&';
         if (!s.equals("")){
@@ -548,7 +548,7 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    private void AddRes(){
+    private void addRes(){
         if (isRes) {
             if (etLCD.getText().toString().equals("Infinity")||etLCD.getText().toString().equals("NaN"))
                 etLCD.setText("");
@@ -592,39 +592,6 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-    /*private String FuncCorrect(String ex) {
-        ex=ex.replaceAll("÷","/");
-        ex=ex.replaceAll("√","sqrt");
-        ex=ex.replaceAll("π","pi");
-        char c='1';
-        int ind, ident=ex.indexOf('!');
-        while (ident > -1){
-            String tmp=ex.substring(0,ident);
-            c=tmp.charAt(tmp.length() - 1);
-            ex=Utils.removeCharAt(ex, ident);
-            if (c==')')
-            {
-                ind=tmp.lastIndexOf('(');
-                ex=ex.substring(0, ind)+"fact"+ex.substring(ind);
-            }
-            else
-            {
-                ind=0;
-                for (int i=tmp.length()-1; i>=0; i--){
-                    if (!Character.isDigit(tmp.charAt(i)))
-                    {
-                        if (tmp.charAt(i)!='.')
-                            ind=i+1;
-                        break;
-                    }
-                }
-                ex=ex.substring(0, ident)+")"+ex.substring(ident);
-                ex=ex.substring(0, ind)+"fact("+ex.substring(ind);
-            }
-            ident=ex.indexOf('!');
-        }
-        return ex;
-    }*/
 
     private void saveFile(String text) {
         try {

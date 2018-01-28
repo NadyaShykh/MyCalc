@@ -58,61 +58,52 @@
             <Button
                 android:id="@+id/buttonDecDeg"
                 style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@android:color/darker_gray"
                 android:text="@string/_10_x"
-                android:textSize="15sp"
-                app:layout_constraintTop_toBottomOf="@+id/editText" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/buttonClear"
                 style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@android:color/darker_gray"
                 android:text="@string/_clean"
-                android:textSize="15sp"
-                app:layout_constraintTop_toBottomOf="@+id/editText" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/buttonBack"
                 style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@android:color/darker_gray"
                 android:text="@string/_back"
-                android:textSize="15sp"
-                app:layout_constraintTop_toBottomOf="@+id/editText" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/buttonPers"
                 style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@android:color/darker_gray"
                 android:text="@string/_mod"
-                android:textSize="15sp"
-                app:layout_constraintTop_toBottomOf="@+id/editText" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/buttonDivide"
                 style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@android:color/darker_gray"
                 android:text="@string/_div"
-                android:textSize="15sp"
-                app:layout_constraintTop_toBottomOf="@+id/editText" />
+                android:textSize="15sp" />
 
 
         </LinearLayout>
@@ -126,9 +117,8 @@
             <Button
                 android:id="@+id/buttonFrac"
                 style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@android:color/darker_gray"
                 android:text="@string/_1_x"
@@ -137,49 +127,42 @@
             <Button
                 android:id="@+id/buttonSeven"
                 style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorLightGray"
                 android:text="@string/_7"
-                android:textSize="15sp"
-                app:layout_constraintTop_toBottomOf="@+id/buttonClear" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/buttonEight"
                 style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorLightGray"
                 android:text="@string/_8"
-                android:textSize="15sp"
-                app:layout_constraintStart_toEndOf="@+id/buttonSeven"
-                app:layout_constraintTop_toBottomOf="@+id/buttonClear" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/buttonNine"
                 style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorLightGray"
                 android:text="@string/_9"
-                android:textSize="15sp"
-                app:layout_constraintStart_toEndOf="@+id/buttonEight"
-                app:layout_constraintTop_toBottomOf="@+id/buttonClear" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/buttonMultiply"
                 style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@android:color/darker_gray"
                 android:text="@string/_mul"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/buttonClear" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -192,8 +175,8 @@
             <Button
                 android:id="@+id/buttonSqr"
                 style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@android:color/darker_gray"
                 android:text="@string/_sqr"
@@ -202,49 +185,42 @@
             <Button
                 android:id="@+id/buttonFour"
                 style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorLightGray"
                 android:text="@string/_4"
-                android:textSize="15sp"
-                app:layout_constraintTop_toBottomOf="@+id/buttonSeven" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/buttonFive"
                 style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorLightGray"
                 android:text="@string/_5"
-                android:textSize="15sp"
-                app:layout_constraintStart_toEndOf="@+id/buttonFour"
-                app:layout_constraintTop_toBottomOf="@+id/buttonSeven" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/buttonSix"
                 style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorLightGray"
                 android:text="@string/_6"
-                android:textSize="15sp"
-                app:layout_constraintStart_toEndOf="@+id/buttonFive"
-                app:layout_constraintTop_toBottomOf="@+id/buttonSeven" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/buttonAdd"
                 style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@android:color/darker_gray"
                 android:text="@string/_add"
-                android:textSize="15sp"
-                app:layout_constraintStart_toEndOf="@+id/buttonSix"
-                app:layout_constraintTop_toBottomOf="@+id/buttonSeven" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -257,8 +233,8 @@
             <Button
                 android:id="@+id/buttonSqrt"
                 style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@android:color/darker_gray"
                 android:text="@string/_sqrt"
@@ -267,47 +243,42 @@
             <Button
                 android:id="@+id/buttonOne"
                 style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorLightGray"
                 android:text="@string/_1"
-                android:textSize="15sp"
-                app:layout_constraintTop_toBottomOf="@+id/buttonFour" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/buttonTwo"
                 style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorLightGray"
                 android:text="@string/_2"
-                android:textSize="15sp"
-                app:layout_constraintStart_toEndOf="@+id/buttonOne"
-                app:layout_constraintTop_toBottomOf="@+id/buttonFour" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/buttonThree"
                 style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorLightGray"
                 android:text="@string/_3"
-                android:textSize="15sp"
-                app:layout_constraintTop_toBottomOf="@+id/buttonFour" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/buttonSubstract"
                 style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@android:color/darker_gray"
                 android:text="@string/_sub"
-                android:textSize="15sp"
-                app:layout_constraintTop_toBottomOf="@+id/buttonThree" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -320,8 +291,8 @@
             <Button
                 android:id="@+id/buttonFact"
                 style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@android:color/darker_gray"
                 android:text="@string/_fact"
@@ -330,19 +301,18 @@
             <Button
                 android:id="@+id/buttonBraces"
                 style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorLightGray"
                 android:text="@string/_br"
-                android:textSize="15sp"
-                app:layout_constraintTop_toBottomOf="@+id/buttonOne" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/buttonZero"
                 style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorLightGray"
                 android:text="@string/_0"
@@ -353,26 +323,22 @@
             <Button
                 android:id="@+id/buttonDot"
                 style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorLightGray"
                 android:text="@string/_dot"
-                android:textSize="15sp"
-                app:layout_constraintStart_toEndOf="@+id/buttonZero"
-                app:layout_constraintTop_toBottomOf="@+id/buttonOne" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/buttonEqual"
                 style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@android:color/holo_orange_dark"
                 android:text="@string/_eq"
-                android:textSize="15sp"
-                app:layout_constraintStart_toEndOf="@+id/buttonDot"
-                app:layout_constraintTop_toBottomOf="@+id/buttonSubtract" />
+                android:textSize="15sp" />
         </LinearLayout>
 
     </LinearLayout>
