@@ -4,6 +4,7 @@
     <string name="item1">Advanced</string>
     <string name="item2">Settings</string>
     <string name="item3">History</string>
+    <string name="item4">Function</string>
     <string name="title_activity_history">History</string>
     <string name="_clean">C</string>
     <string name="_back">←</string>
@@ -47,4 +48,7 @@
     <string name="_sec">sec</string>
     <string name="_cosec">cosec</string>
     <string name="_e_x">e<sup><small><ex>x</ex></small></sup></string>
+    <string name="_ex">x</string>
+    <string name="_func"><b><i>f(x)=</i></b></string>
+    <string name="_var"><b><i>x=</i></b></string>
 </resources>

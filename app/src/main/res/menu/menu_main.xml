@@ -10,6 +10,11 @@
             app:showAsAction="never">
         </item>
         <item
+            android:id="@+id/itemFunc"
+            android:title="@string/item4"
+            app:showAsAction="never">
+        </item>
+        <item
             android:id="@+id/itemHist"
             android:title="@string/item3"
             app:showAsAction="never">

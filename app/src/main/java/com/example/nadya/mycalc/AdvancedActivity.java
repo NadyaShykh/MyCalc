@@ -1,6 +1,5 @@
 package com.example.nadya.mycalc;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -20,8 +19,6 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.lang.reflect.Method;
-import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 public class AdvancedActivity extends AppCompatActivity implements View.OnClickListener {
@@ -35,18 +32,15 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
     boolean isRes;
     SharedPreferences sp;
     Boolean correct;
-    String style_calc;
-    static String themeId;
+    String styleCalc;
+    static String sThemeId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sp = PreferenceManager.getDefaultSharedPreferences(this);
         correct = sp.getBoolean("corr", true);
-        style_calc = sp.getString("app_style", "Ligth");
-        if (style_calc.equals("Ligth"))
-            setTheme(R.style.AppTheme);
-        else
-            setTheme(R.style.CustomTheme);
+        styleCalc = sp.getString("app_style", "Ligth");
+        Utils.loadTheme(this, styleCalc);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_advanced);
         isRes=false;
@@ -107,12 +101,10 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
     protected void onResume() {
         sp = PreferenceManager.getDefaultSharedPreferences(this);
         correct = sp.getBoolean("corr", true);
-        style_calc = sp.getString("app_style", "Ligth");
-        if (style_calc.equals("Ligth"))
-            themeId="2131689478";
-        else
-            themeId="2131689645";
-        if (!Integer.toString(Utils.getThemeId(this)).equals(themeId))
+        styleCalc = sp.getString("app_style", "Ligth");
+        if (styleCalc.equals("Ligth")) sThemeId="2131689478";
+        else sThemeId="2131689645";
+        if (!Integer.toString(Utils.getThemeId(this)).equals(sThemeId))
             Utils.changeToTheme(this, Utils.THEME_LIGTH);
         super.onResume();
     }
@@ -127,13 +119,20 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        Intent intent;
         switch(id){
             case R.id.itemAdv:
                 finish();
                 return true;
 
+            case R.id.itemFunc:
+                intent = new Intent(AdvancedActivity.this, FunctionActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+
             case R.id.itemHist:
-                Intent intent = new Intent(AdvancedActivity.this, HistoryActivity.class);
+                intent = new Intent(AdvancedActivity.this, HistoryActivity.class);
                 startActivity(intent);
                 return true;
 
@@ -165,63 +164,63 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.buttonOne:
-                ClickSymb('1');
+                clickSymb('1');
                 break;
 
             case R.id.buttonTwo:
-                ClickSymb('2');
+                clickSymb('2');
                 break;
 
             case R.id.buttonThree:
-                ClickSymb('3');
+                clickSymb('3');
                 break;
 
             case R.id.buttonFour:
-                ClickSymb('4');
+                clickSymb('4');
                 break;
 
             case R.id.buttonFive:
-                ClickSymb('5');
+                clickSymb('5');
                 break;
 
             case R.id.buttonSix:
-                ClickSymb('6');
+                clickSymb('6');
                 break;
 
             case R.id.buttonSeven:
-                ClickSymb('7');
+                clickSymb('7');
                 break;
 
             case R.id.buttonEight:
-                ClickSymb('8');
+                clickSymb('8');
                 break;
 
             case R.id.buttonNine:
-                ClickSymb('9');
+                clickSymb('9');
                 break;
 
             case R.id.buttonZero:
-                ClickSymb('0');
+                clickSymb('0');
                 break;
 
             case R.id.buttonDot:
-                ClickDot();
+                clickDot();
                 break;
 
             case R.id.buttonAdd:
-                ClickSymb('+');
+                clickSymb('+');
                 break;
 
             case R.id.buttonDivide:
-                ClickSymb('÷');
+                clickSymb('÷');
                 break;
 
             case R.id.buttonMultiply:
-                ClickSymb('*');
+                clickSymb('*');
                 break;
 
             case R.id.buttonSubstract:
-                ClickSymb('-');
+                clickSymb('-');
                 break;
 
             case R.id.buttonClear:
@@ -237,11 +236,11 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.buttonBraces:
-                ClickBr();
+                clickBr();
                 break;
 
             case R.id.buttonEqual:
-                Calculate();
+                calcExpr();
                 break;
 
             case R.id.infoTextView:
@@ -255,47 +254,47 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.buttonExp:
-                ClickSymb('e');
+                clickSymb('e');
                 break;
 
             case R.id.buttonPi:
-                ClickSymb('π');
+                clickSymb('π');
                 break;
 
             case R.id.buttonSin:
-                ClickFunc(4);
+                clickFunc(4);
                 break;
 
             case R.id.buttonSqrt:
-                ClickFunc(3);
+                clickFunc(3);
                 break;
 
             case R.id.buttonSqr:
-                ClickFunc(9);
+                clickFunc(9);
                 break;
 
             case R.id.buttonPow:
-                ClickFunc(10);
+                clickFunc(10);
                 break;
 
             case R.id.buttonCos:
-                ClickFunc(5);
+                clickFunc(5);
                 break;
 
             case R.id.buttonTan:
-                ClickFunc(6);
+                clickFunc(6);
                 break;
 
             case R.id.buttonLn:
-                ClickFunc(7);
+                clickFunc(7);
                 break;
 
             case R.id.buttonLg:
-                ClickFunc(8);
+                clickFunc(8);
                 break;
 
             case R.id.buttonAbs:
-                ClickFunc(19);
+                clickFunc(19);
                 break;
 
             case R.id.infoDegRad:
@@ -314,43 +313,43 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
         {
             switch(v.getId()) {
                 case R.id.buttonSec:
-                    ClickFunc(11);
+                    clickFunc(11);
                     break;
 
                 case R.id.buttonCosec:
-                    ClickFunc(12);
+                    clickFunc(12);
                     break;
 
                 case R.id.buttonSinH:
-                    ClickFunc(13);
+                    clickFunc(13);
                     break;
 
                 case R.id.buttonCosH:
-                    ClickFunc(14);
+                    clickFunc(14);
                     break;
 
                 case R.id.buttonTanH:
-                    ClickFunc(15);
+                    clickFunc(15);
                     break;
 
                 case R.id.buttonFact:
-                    ClickFunc(16);
+                    clickFunc(16);
                     break;
 
                 case R.id.buttonFrac:
-                    ClickFunc(2);
+                    clickFunc(2);
                     break;
 
                 case R.id.buttonTwoDeg:
-                    ClickFunc(17);
+                    clickFunc(17);
                     break;
 
                 case R.id.buttonDecDeg:
-                    ClickFunc(1);
+                    clickFunc(1);
                     break;
 
                 case R.id.buttonExpDeg:
-                    ClickFunc(18);
+                    clickFunc(18);
                     break;
             }
         }
@@ -361,7 +360,7 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
         return (tvDegRad.getText().toString().equals("Rad"));
     }
 
-    private void ClickSymb(char symb){
+    private void clickSymb(char symb){
         if (isRes) {
             if (etLCD.getText().toString().equals("Infinity")||etLCD.getText().toString().equals("NaN"))
                 etLCD.setText("");
@@ -374,57 +373,17 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
             isRes=false;
         }
         String s = etLCD.getText().toString();
-        char c;
-        c = 'a';
-        if (s.equals(""))
-        {
-            if (Character.isDigit(symb)||"-()eπ".indexOf(symb) > -1) // дописати пі
-                etLCD.setText(etLCD.getText().toString() + symb);
-        }
-        else
-        {
-            c = s.charAt(s.length() - 1);
-            if ("+-*÷%".indexOf(symb) > -1) // вивід знаку операції, тут включити факторіал, e, pi
-            {
-                if (Character.isDigit(c)||c=='!'||c=='e'||c=='π')
-                    etLCD.setText(etLCD.getText().toString() + symb);
-                else
-                {
-                    if ("(".indexOf(c) > -1 && symb == '-')
-                        etLCD.setText(etLCD.getText().toString() + symb);
-                    if (")".indexOf(c) > -1)
-                        etLCD.setText(etLCD.getText().toString() + symb);
-                }
-            }
-            else {
-                String ex=etLCD.getText().toString() + symb;
-                ex=ex.replaceAll("eπ","e");
-                ex=ex.replaceAll("ππ","π");
-                ex=ex.replaceAll("ee","e");
-                ex=ex.replaceAll("πe","π");
-                etLCD.setText(ex);
-            }
-        }
+        etLCD.setText(Utils.getSymb(s, symb));
+
     }
 
-    private void ClickBr(){
+    private void clickBr(){
         addRes();
-        String s = etLCD.getText().toString();
-        if (s.equals(""))
-            etLCD.setText("(");
-        else {
-            int brCount1 = s.split("\\(", -1).length - 1;
-            int brCount2 = s.split("\\)", -1).length - 1;
-            char c=s.charAt(s.length() - 1);
-            if ("+-*÷√".indexOf(c) > -1) etLCD.setText(etLCD.getText().toString() + "(");
-            if (Character.isDigit(c)&&brCount1>brCount2) etLCD.setText(etLCD.getText().toString() + ")");
-            if (")!eπ".indexOf(c) > -1&&brCount1>brCount2) etLCD.setText(etLCD.getText().toString() + ")"); // дописати пі
-            if (c=='(') etLCD.setText(etLCD.getText().toString() + "(");
-        }
+        etLCD.setText(Utils.getBr(etLCD.getText().toString()));
     }
 
 
-    private void ClickDot(){
+    private void clickDot(){
         String s = etLCD.getText().toString();
         if (!s.equals(""))
         {
@@ -435,117 +394,15 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
             }
             else
             {
-                char c=s.charAt(s.length() - 1);
-                if (Character.isDigit(c))
-                {
-                    //перевірити чи нема крапки в числі
-                    if (s.lastIndexOf('.')<0) // крапки в рядку нема
-                        etLCD.setText(etLCD.getText().toString() + ".");
-                    else
-                    {
-                        if ((s.lastIndexOf('+')>s.lastIndexOf('.'))||(s.lastIndexOf('-')>s.lastIndexOf('.'))
-                                ||(s.lastIndexOf('*')>s.lastIndexOf('.'))||(s.lastIndexOf('÷')>s.lastIndexOf('.'))
-                                ||(s.lastIndexOf('%')>s.lastIndexOf('.')))
-                            etLCD.setText(etLCD.getText().toString() + ".");
-                    }
-                }
+                etLCD.setText(Utils.getDot(s));
             }
         }
     }
 
-    private void ClickFunc(int f){
+    private void clickFunc(int f){
         if (!(f==9||f==10||f==16)) addRes();// замінити нумерацію
         String s = etLCD.getText().toString();
-        char c='&';
-        if (!s.equals("")){
-            c=s.charAt(s.length() - 1);
-        }
-        if (s.equals("")||("+-*÷%(".indexOf(c) > -1))
-        {
-            switch(f) {
-                case 1:
-                    etLCD.setText(etLCD.getText().toString() + "10^(");
-                    break;
-
-                case 2:
-                    etLCD.setText(etLCD.getText().toString() + "1/");
-                    break;
-
-                case 3:
-                    etLCD.setText(etLCD.getText().toString() + "√(");
-                    break;
-
-                case 4:
-                    etLCD.setText(etLCD.getText().toString() + "sin(");
-                    break;
-
-                case 5:
-                    etLCD.setText(etLCD.getText().toString() + "cos(");
-                    break;
-
-                case 6:
-                    etLCD.setText(etLCD.getText().toString() + "tan(");
-                    break;
-
-                case 7:
-                    etLCD.setText(etLCD.getText().toString() + "ln(");
-                    break;
-
-                case 8:
-                    etLCD.setText(etLCD.getText().toString() + "lg(");
-                    break;
-
-                case 11:
-                    etLCD.setText(etLCD.getText().toString() + "sec(");
-                    break;
-
-                case 12:
-                    etLCD.setText(etLCD.getText().toString() + "cosec(");
-                    break;
-
-                case 13:
-                    etLCD.setText(etLCD.getText().toString() + "sinh(");
-                    break;
-
-                case 14:
-                    etLCD.setText(etLCD.getText().toString() + "cosh(");
-                    break;
-
-                case 15:
-                    etLCD.setText(etLCD.getText().toString() + "tanh(");
-                    break;
-
-                case 17:
-                    etLCD.setText(etLCD.getText().toString() + "2^(");
-                    break;
-
-                case 18:
-                    etLCD.setText(etLCD.getText().toString() + "e^(");
-                    break;
-
-                case 19:
-                    etLCD.setText(etLCD.getText().toString() + "abs(");
-                    break;
-
-
-            }
-        }
-        if (Character.isDigit(c)||c==')')
-        {
-            switch(f) {
-                case 9:
-                    etLCD.setText(etLCD.getText().toString() + "^(2)");
-                    break;
-
-                case 10:
-                    etLCD.setText(etLCD.getText().toString() + "^(");
-                    break;
-
-                case 16:
-                    etLCD.setText(etLCD.getText().toString() + "!");
-                    break;
-            }
-        }
+        etLCD.setText(Utils.getFunc(s, f));
     }
 
     private void addRes(){
@@ -561,7 +418,7 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
-    private void Calculate(){
+    private void calcExpr(){
         if (correct)  etLCD.setText(Utils.autoCorrection(etLCD.getText().toString()));
         MathParser parser = new MathParser();
         String expression = etLCD.getText().toString();
@@ -597,15 +454,15 @@ public class AdvancedActivity extends AppCompatActivity implements View.OnClickL
         try {
             String line="";
             File f = new File(getFilesDir() + "/hist.txt");
-            if (f.exists())
-                line=readFile();
+            if (f.exists()) line=readFile();
             line="\n"+text+"\n"+line;
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(openFileOutput("hist.txt", MODE_WORLD_READABLE)));
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
+                    openFileOutput("hist.txt", MODE_WORLD_READABLE)));
             bw.write(line);
             bw.flush();
             bw.close();
-
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             Toast.makeText(getApplicationContext(),
                     t.toString(), Toast.LENGTH_LONG).show();
         }

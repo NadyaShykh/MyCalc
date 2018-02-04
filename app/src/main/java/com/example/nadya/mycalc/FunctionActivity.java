@@ -1,43 +1,40 @@
 package com.example.nadya.mycalc;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.view.View.OnClickListener;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
-import android.view.Menu;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.text.DecimalFormat;
 
-public class MainActivity extends AppCompatActivity implements OnClickListener {
 
+public class FunctionActivity extends AppCompatActivity implements View.OnClickListener {
     Button btOne, btTwo, btThree, btFour, btFive, btSix, btSeven, btEight, btNine, btZero;
-    Button btPlus, btMinus, btMulti, btDiv, btEqual, btClear, btDot, btPer, btBack, btBrace;
-    Button btDec, btFrac, btSqr,  btSqrt, btFact;
-    TextView tvLCD;
-    public TextView etLCD;
+    Button btPlus, btMinus, btMulti, btDiv, btEqual, btClear, btDot, btAbs, btBack, btBrace;
+    Button btExp, btPi, btSin, btSqrt, btX, btPow, btCos, btTan, btLn, btLg;
+    Button btSec, btCosec, btSinH, btCosH, btTanH, btSqr, btFrac, btTwoDeg, btDec, btExpDeg;
+
+    TextView tvLCD, etLCD, tvDegRad, tvVar;
+
     boolean isRes;
     SharedPreferences sp;
-    Boolean correct;
+    Boolean correct, up;
     String styleCalc;
     static String sThemeId;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +43,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         styleCalc = sp.getString("app_style", "Ligth");
         Utils.loadTheme(this, styleCalc);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_function);
         isRes=false;
+        up=true;
 
         int[] bt_ids;
         Button[] bt_arr;
@@ -55,10 +53,12 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         bt_ids = new int[]{R.id.buttonOne, R.id.buttonTwo, R.id.buttonThree, R.id.buttonFour, R.id.buttonFive,
                 R.id.buttonSix, R.id.buttonSeven, R.id.buttonEight, R.id.buttonNine, R.id.buttonZero,
                 R.id.buttonAdd, R.id.buttonSubstract,R.id.buttonMultiply, R.id.buttonDivide, R.id.buttonEqual,
-                R.id.buttonClear, R.id.buttonDot, R.id.buttonPers, R.id.buttonBack, R.id.buttonBraces};
+                R.id.buttonClear, R.id.buttonDot, R.id.buttonAbs, R.id.buttonBack, R.id.buttonBraces, R.id.buttonExp, R.id.buttonPi,
+                R.id.buttonSin, R.id.buttonSqrt, R.id.buttonX, R.id.buttonPow, R.id.buttonCos, R.id.buttonTan, R.id.buttonLn, R.id.buttonLg};
 
         bt_arr = new Button[]{btOne, btTwo, btThree, btFour, btFive, btSix, btSeven, btEight, btNine, btZero,
-                 btPlus, btMinus, btMulti, btDiv, btEqual, btClear, btDot, btPer, btBack, btBrace};
+                btPlus, btMinus, btMulti, btDiv, btEqual, btClear, btDot, btAbs, btBack, btBrace, btExp, btPi,
+                btSin, btSqrt, btX, btPow, btCos, btTan, btLn, btLg};
 
         for (int i = 0, n = bt_arr.length; i < n; i++)
         {
@@ -68,25 +68,39 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
         {
-            btDec = (Button) findViewById(R.id.buttonDecDeg);
-            btFrac = (Button) findViewById(R.id.buttonFrac);
+            btSec = (Button) findViewById(R.id.buttonSec);
+            btCosec = (Button) findViewById(R.id.buttonCosec);
+            btSinH = (Button) findViewById(R.id.buttonSinH);
+            btCosH = (Button) findViewById(R.id.buttonCosH);
+            btTanH = (Button) findViewById(R.id.buttonTanH);
             btSqr = (Button) findViewById(R.id.buttonSqr);
-            btSqrt = (Button) findViewById(R.id.buttonSqrt);
-            btFact = (Button) findViewById(R.id.buttonFact);
-            btDec.setOnClickListener(this);
-            btFrac.setOnClickListener(this);
+            btFrac = (Button) findViewById(R.id.buttonFrac);
+            btTwoDeg = (Button) findViewById(R.id.buttonTwoDeg);
+            btDec = (Button) findViewById(R.id.buttonDecDeg);
+            btExpDeg = (Button) findViewById(R.id.buttonExpDeg);
+
+            btSec.setOnClickListener(this);
+            btCosec.setOnClickListener(this);
+            btSinH.setOnClickListener(this);
+            btCosH.setOnClickListener(this);
+            btTanH.setOnClickListener(this);
             btSqr.setOnClickListener(this);
-            btSqrt.setOnClickListener(this);
-            btFact.setOnClickListener(this);
+            btFrac.setOnClickListener(this);
+            btTwoDeg.setOnClickListener(this);
+            btDec.setOnClickListener(this);
+            btExpDeg.setOnClickListener(this);
         }
 
         tvLCD = (TextView) findViewById(R.id.infoTextView);
         etLCD = (TextView) findViewById(R.id.editText);
+        tvDegRad = (TextView) findViewById(R.id.infoDegRad);
+        tvVar = (TextView) findViewById(R.id.editVar);
 
         tvLCD.setOnClickListener(this);
-
+        etLCD.setOnClickListener(this);
+        tvDegRad.setOnClickListener(this);
+        tvVar.setOnClickListener(this);
     }
-
 
     @Override
     protected void onResume() {
@@ -100,10 +114,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         super.onResume();
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        menu.getItem(0).setTitle("Simply");
+        menu.getItem(1).setTitle("Advanced");
         return true;
     }
 
@@ -113,22 +128,24 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         Intent intent;
         switch(id){
             case R.id.itemAdv:
-                intent = new Intent(MainActivity.this, AdvancedActivity.class);
+                intent = new Intent(FunctionActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
                 return true;
 
             case R.id.itemFunc:
-                intent = new Intent(MainActivity.this, FunctionActivity.class);
+                intent = new Intent(FunctionActivity.this, AdvancedActivity.class);
                 startActivity(intent);
+                finish();
                 return true;
 
             case R.id.itemHist:
-                intent = new Intent(MainActivity.this, HistoryActivity.class);
+                intent = new Intent(FunctionActivity.this, HistoryActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.itemSet:
-                intent = new Intent(MainActivity.this, PrefActivity.class);
+                intent = new Intent(FunctionActivity.this, PrefActivity.class);
                 startActivity(intent);
                 return true;
 
@@ -141,6 +158,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         super.onSaveInstanceState(outState);
         outState.putString("result", etLCD.getText().toString());
         outState.putString("memory", tvLCD.getText().toString());
+        outState.putString("angle", tvDegRad.getText().toString());
+        outState.putString("var", tvVar.getText().toString());
     }
 
     @Override
@@ -148,11 +167,12 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         super.onRestoreInstanceState(savedInstanceState);
         etLCD.setText(savedInstanceState.getString("result"));
         tvLCD.setText(savedInstanceState.getString("memory"));
+        tvDegRad.setText(savedInstanceState.getString("angle"));
+        tvVar.setText(savedInstanceState.getString("var"));
     }
 
     @Override
     public void onClick(View v) {
-
         switch(v.getId()) {
             case R.id.buttonOne:
                 clickSymb('1');
@@ -176,11 +196,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
             case R.id.buttonSix:
                 clickSymb('6');
-                 break;
+                break;
 
             case R.id.buttonSeven:
                 clickSymb('7');
-                 break;
+                break;
 
             case R.id.buttonEight:
                 clickSymb('8');
@@ -214,19 +234,24 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 clickSymb('-');
                 break;
 
-            case R.id.buttonPers:
-                clickSymb('%');
-                break;
-
             case R.id.buttonClear:
-                if (etLCD.getText().toString().equals("")) tvLCD.setText("");
-                etLCD.setText("");
+                if (etLCD.getText().toString().equals("")) tvVar.setText("");
+                if (tvVar.getText().toString().equals("")) etLCD.setText("");
+                if (up) etLCD.setText("");
+                else tvVar.setText("");
+                tvLCD.setText("");
                 isRes=false;
                 break;
 
             case R.id.buttonBack:
-                if (!etLCD.getText().toString().equals(""))
-                    etLCD.setText(etLCD.getText().toString().substring(0, etLCD.getText().toString().length() - 1));
+                if (up) {
+                    if (!etLCD.getText().toString().equals(""))
+                        etLCD.setText(etLCD.getText().toString().substring(0, etLCD.getText().toString().length() - 1));
+                }
+                else {
+                    if (!tvVar.getText().toString().equals(""))
+                        tvVar.setText(tvVar.getText().toString().substring(0, tvVar.getText().toString().length() - 1));
+                }
                 break;
 
             case R.id.buttonBraces:
@@ -237,41 +262,121 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 calcExpr();
                 break;
 
-            case R.id.infoTextView:
-                String s = etLCD.getText().toString();
-                char c = s.charAt(s.length() - 1);
-                if ("+-*÷%(".indexOf(c) > -1)
-                    etLCD.setText(etLCD.getText().toString()+tvLCD.getText().toString());
-                else
-                    etLCD.setText(tvLCD.getText().toString());
+            case R.id.editText:
+                up=true;
                 isRes=false;
+                break;
+
+            case R.id.editVar:
+                up=false;
+                isRes=false;
+                break;
+
+            case R.id.buttonExp:
+                clickSymb('e');
+                break;
+
+            case R.id.buttonPi:
+                clickSymb('π');
+                break;
+
+            case R.id.buttonSin:
+                clickFunc(4);
+                break;
+
+            case R.id.buttonSqrt:
+                clickFunc(3);
+                break;
+
+            case R.id.buttonPow:
+                clickFunc(10);
+                break;
+
+            case R.id.buttonCos:
+                clickFunc(5);
+                break;
+
+            case R.id.buttonTan:
+                clickFunc(6);
+                break;
+
+            case R.id.buttonLn:
+                clickFunc(7);
+                break;
+
+            case R.id.buttonLg:
+                clickFunc(8);
+                break;
+
+            case R.id.buttonAbs:
+                clickFunc(19);
+                break;
+
+            case R.id.buttonX:
+                clickSymb('x');
+                break;
+
+            case R.id.infoDegRad:
+                if (tvDegRad.getText().toString().equals("Rad"))
+                {
+                    tvDegRad.setText("Deg");
+                }
+                else {
+                    tvDegRad.setText("Rad");
+                }
+
                 break;
         }
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
         {
             switch(v.getId()) {
-                case R.id.buttonDecDeg:
-                    clickFunc(1);
+                case R.id.buttonSec:
+                    clickFunc(11);
                     break;
 
-                case R.id.buttonFrac:
-                    clickFunc(2);
+                case R.id.buttonCosec:
+                    clickFunc(12);
                     break;
 
-                case R.id.buttonSqrt:
-                    clickFunc(3);
+                case R.id.buttonSinH:
+                    clickFunc(13);
+                    break;
+
+                case R.id.buttonCosH:
+                    clickFunc(14);
+                    break;
+
+                case R.id.buttonTanH:
+                    clickFunc(15);
                     break;
 
                 case R.id.buttonSqr:
                     clickFunc(9);
                     break;
 
-                case R.id.buttonFact:
-                    clickFunc(16);
+                case R.id.buttonFrac:
+                    clickFunc(2);
+                    break;
+
+                case R.id.buttonTwoDeg:
+                    clickFunc(17);
+                    break;
+
+                case R.id.buttonDecDeg:
+                    clickFunc(1);
+                    break;
+
+                case R.id.buttonExpDeg:
+                    clickFunc(18);
                     break;
             }
         }
+    }
+
+    public boolean isRad()
+    {
+        return (tvDegRad.getText().toString().equals("Rad"));
     }
 
     private void clickSymb(char symb){
@@ -286,8 +391,23 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             }
             isRes=false;
         }
-        String s = etLCD.getText().toString();
-        etLCD.setText(Utils.getSymb(s, symb));
+        String s;
+        if (up) {
+            s = etLCD.getText().toString();
+            etLCD.setText(Utils.getSymb(s, symb));
+        }
+        else {
+            s = tvVar.getText().toString();
+            //if (symb=='.'&&s.indexOf(".")<0) tvVar.setText(s+".");
+            if (Character.isDigit((char) symb)) {
+                tvVar.setText(Utils.getSymb(s, symb)); // доробити перевірку вводу числа
+            }
+            else {
+                if ((symb=='-')&& s.equals("")) tvVar.setText("-");
+                if ((symb=='e'||symb=='π')&& (s.equals("")||s.equals("-"))) tvVar.setText(Utils.getSymb(s, symb));
+
+            }
+        }
     }
 
     private void clickBr(){
@@ -295,24 +415,20 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         etLCD.setText(Utils.getBr(etLCD.getText().toString()));
     }
 
+
     private void clickDot(){
-        String s = etLCD.getText().toString();
+        String s;
+        if (up) s = etLCD.getText().toString();
+        else s = tvVar.getText().toString();
         if (!s.equals(""))
         {
-            if (isRes)
-            {
-                if (s.indexOf('.') < 0) etLCD.setText(etLCD.getText().toString() + ".");
-                isRes=false;
-            }
-            else
-            {
-                etLCD.setText(Utils.getDot(s));
-            }
+            if (up) etLCD.setText(Utils.getDot(s));
+            else tvVar.setText(Utils.getDot(s));
         }
     }
 
     private void clickFunc(int f){
-        if (!(f==9||f==16)) addRes();
+        if (!(f==9||f==10||f==16)) addRes();// замінити нумерацію
         String s = etLCD.getText().toString();
         etLCD.setText(Utils.getFunc(s, f));
     }
@@ -335,30 +451,35 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         MathParser parser = new MathParser();
         String expression = etLCD.getText().toString();
         expression=Utils.funcCorrect(expression);
-            try{
-                double res =parser.Parse(expression, true);
+        String x=tvVar.getText().toString();
+        if (!x.equals("")) {
+            if (Double.parseDouble(x)<0) x = "(" + x + ")";
+            expression=expression.replaceAll("x",x);
+            try {
+                double res = parser.Parse(expression, isRad());
+                res = ((double) Math.round(res * 10000000000L)) / 10000000000L;
                 long r = Math.round(res);
-                if (r==res) {
-                    saveFile(etLCD.getText().toString()+"="+Integer.toString((int) r));
-                    etLCD.setText(Integer.toString((int) r));
-                } else
-                {
-                    if (Double.toString(res).equals("Infinity")||Double.toString(res).equals("NaN"))
-                        etLCD.setText(Double.toString(res));
+                if (r == res) {
+                    saveFile(etLCD.getText().toString() + "=" + Integer.toString((int) r));
+                    tvLCD.setText("f("+tvVar.getText().toString()+")="+Integer.toString((int) r));
+                } else {
+                    if (Double.toString(res).equals("Infinity") || Double.toString(res).equals("NaN"))
+                        tvLCD.setText("f("+tvVar.getText().toString()+")="+Double.toString(res));
                     else {
-                        String s=etLCD.getText().toString()+"=";
-                        DecimalFormat df = new DecimalFormat("#.##########");
-                        df.setRoundingMode(RoundingMode.CEILING);
-                        etLCD.setText(df.format(res).replace(',', '.'));
-                        saveFile(s+etLCD.getText().toString());
+                        String s = etLCD.getText().toString() + "=";
+                        tvLCD.setText("f("+tvVar.getText().toString()+")="+Double.toString(res));
+                        saveFile(s + etLCD.getText().toString());
                     }
                 }
-                isRes=true;
-            } catch(Exception e){
+                isRes = true;
+            } catch (Exception e) {
                 Toast.makeText(getApplicationContext(),
                         "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
-
+        }
+        else
+            Toast.makeText(getApplicationContext(),
+                    "Enter x-value! ", Toast.LENGTH_LONG).show();
     }
 
 
@@ -366,16 +487,15 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         try {
             String line="";
             File f = new File(getFilesDir() + "/hist.txt");
-            if (f.exists())
-                line=readFile();
+            if (f.exists()) line=readFile();
             line="\n"+text+"\n"+line;
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
-                    openFileOutput("hist.txt", Context.MODE_WORLD_READABLE)));
+                    openFileOutput("hist.txt", MODE_WORLD_READABLE)));
             bw.write(line);
             bw.flush();
             bw.close();
-
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             Toast.makeText(getApplicationContext(),
                     t.toString(), Toast.LENGTH_LONG).show();
         }
@@ -403,6 +523,5 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         }
         return "";
     }
-
 
 }

@@ -10,13 +10,13 @@ import java.util.HashMap;
 public class MathParser {
 
     private static HashMap<String, Double> var;
-    private static boolean isRad;
+    private static boolean sIsRad;
 
     public MathParser() {
         var = new HashMap<>();
         setVariable("pi",Math.PI);
         setVariable("e",Math.E);
-        isRad=false;
+        sIsRad=false;
     }
 
 
@@ -62,7 +62,7 @@ public class MathParser {
     public double Parse(String s, boolean r) throws Exception {
         if(s.isEmpty())
             throw new Exception("Empty expression");
-        isRad=r;
+        sIsRad=r;
         Result result = binaryFunc(s);
         if (!result.rest.isEmpty())
             throw new Exception("Error: can't full parse \n "+
@@ -265,7 +265,7 @@ public class MathParser {
 
     private Result processFunction(String func, Result r) throws Exception{
         double ang;
-        if (isRad)
+        if (sIsRad)
             ang=r.acc;
         else
             ang=Math.toRadians(r.acc);

@@ -28,12 +28,12 @@
         <activity
             android:name=".HistoryActivity"
             android:label="@string/title_activity_history"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PrefActivity"
             android:label="Settings"
-            android:theme="@style/AppTheme"
-            />
+            android:theme="@style/AppTheme" />
+        <activity android:name=".FunctionActivity"></activity>
     </application>
 
 </manifest>
