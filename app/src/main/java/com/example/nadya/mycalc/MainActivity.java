@@ -337,6 +337,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         expression=Utils.funcCorrect(expression);
             try{
                 double res =parser.Parse(expression, true);
+                res = ((double)Math.round(res * 10000000000L)) / 10000000000L; //
                 long r = Math.round(res);
                 if (r==res) {
                     saveFile(etLCD.getText().toString()+"="+Integer.toString((int) r));
@@ -347,9 +348,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                         etLCD.setText(Double.toString(res));
                     else {
                         String s=etLCD.getText().toString()+"=";
-                        DecimalFormat df = new DecimalFormat("#.##########");
-                        df.setRoundingMode(RoundingMode.CEILING);
-                        etLCD.setText(df.format(res).replace(',', '.'));
+                        etLCD.setText(Double.toString(res));
                         saveFile(s+etLCD.getText().toString());
                     }
                 }

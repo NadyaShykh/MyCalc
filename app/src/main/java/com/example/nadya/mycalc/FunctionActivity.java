@@ -398,7 +398,6 @@ public class FunctionActivity extends AppCompatActivity implements View.OnClickL
         }
         else {
             s = tvVar.getText().toString();
-            //if (symb=='.'&&s.indexOf(".")<0) tvVar.setText(s+".");
             if (Character.isDigit((char) symb)) {
                 tvVar.setText(Utils.getSymb(s, symb)); // доробити перевірку вводу числа
             }
@@ -460,7 +459,6 @@ public class FunctionActivity extends AppCompatActivity implements View.OnClickL
                 res = ((double) Math.round(res * 10000000000L)) / 10000000000L;
                 long r = Math.round(res);
                 if (r == res) {
-                    saveFile(etLCD.getText().toString() + "=" + Integer.toString((int) r));
                     tvLCD.setText("f("+tvVar.getText().toString()+")="+Integer.toString((int) r));
                 } else {
                     if (Double.toString(res).equals("Infinity") || Double.toString(res).equals("NaN"))
@@ -468,7 +466,6 @@ public class FunctionActivity extends AppCompatActivity implements View.OnClickL
                     else {
                         String s = etLCD.getText().toString() + "=";
                         tvLCD.setText("f("+tvVar.getText().toString()+")="+Double.toString(res));
-                        saveFile(s + etLCD.getText().toString());
                     }
                 }
                 isRes = true;
@@ -482,46 +479,5 @@ public class FunctionActivity extends AppCompatActivity implements View.OnClickL
                     "Enter x-value! ", Toast.LENGTH_LONG).show();
     }
 
-
-    private void saveFile(String text) {
-        try {
-            String line="";
-            File f = new File(getFilesDir() + "/hist.txt");
-            if (f.exists()) line=readFile();
-            line="\n"+text+"\n"+line;
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
-                    openFileOutput("hist.txt", MODE_WORLD_READABLE)));
-            bw.write(line);
-            bw.flush();
-            bw.close();
-        }
-        catch (Throwable t) {
-            Toast.makeText(getApplicationContext(),
-                    t.toString(), Toast.LENGTH_LONG).show();
-        }
-    }
-
-    private String readFile() {
-        try {
-            InputStream inputStream = openFileInput("hist.txt");
-
-            if (inputStream != null) {
-                BufferedReader br = new BufferedReader(new InputStreamReader(
-                        openFileInput("hist.txt")));
-                String line;
-                StringBuilder builder = new StringBuilder();
-
-                while ((line = br.readLine()) != null) {
-                    builder.append(line + "\n");
-                }
-
-                inputStream.close();
-                return builder.toString();
-            }
-        } catch (Throwable t) {
-            Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
-        }
-        return "";
-    }
 
 }
